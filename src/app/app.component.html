@@ -1,2 +1,35 @@
-My Portfolio
-<router-outlet />
+<div class="app-shell">
+	<mat-toolbar color="primary" class="topbar">
+		<span class="brand">{{ title }}</span>
+
+		<span class="spacer"></span>
+
+		<nav class="nav" aria-label="Primary navigation">
+			@for (link of navLinks; track link.path) {
+				<a
+					mat-button
+					[routerLink]="link.path"
+					routerLinkActive="active"
+					[routerLinkActiveOptions]="{ exact: !!link.exact }"
+				>
+					{{ link.label }}
+				</a>
+			}
+		</nav>
+
+		<span class="spacer"></span>
+
+		<mat-slide-toggle
+			[checked]="isDarkMode"
+			(change)="setDarkMode($event.checked)"
+			labelPosition="before"
+			aria-label="Toggle dark mode"
+		>
+			Dark mode
+		</mat-slide-toggle>
+	</mat-toolbar>
+
+	<div class="content">
+		<router-outlet></router-outlet>
+	</div>
+</div>

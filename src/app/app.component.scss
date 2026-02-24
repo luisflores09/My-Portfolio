@@ -1,0 +1,95 @@
+
+:host {
+	display: block;
+	min-height: 100vh;
+}
+
+.app-shell {
+	min-height: 100vh;
+}
+
+.brand {
+	font-weight: 600;
+	letter-spacing: 0.2px;
+}
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+.nav a.active {
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 6px;
+	text-decoration-color: var(--brand-primary-soft);
+}
+
+.content {
+	--page-pad: clamp(12px, 4vw, 24px);
+	padding-top: var(--page-pad);
+	padding-bottom: max(var(--page-pad), env(safe-area-inset-bottom));
+	padding-left: max(var(--page-pad), env(safe-area-inset-left));
+	padding-right: max(var(--page-pad), env(safe-area-inset-right));
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+	.topbar {
+		height: auto;
+		min-height: unset;
+		flex-wrap: wrap;
+		row-gap: 6px;
+		padding-top: max(10px, env(safe-area-inset-top));
+		padding-bottom: 8px;
+		padding-left: max(12px, env(safe-area-inset-left));
+		padding-right: max(12px, env(safe-area-inset-right));
+	}
+
+	.spacer {
+		display: none;
+	}
+
+	.brand {
+		flex: 1 1 auto;
+		min-width: 10ch;
+	}
+
+	.topbar mat-slide-toggle {
+		order: 5;
+		flex: 0 0 auto;
+		margin-top: 0;
+		margin-left: 8px;
+		white-space: nowrap;
+		font-size: 0.9rem;
+	}
+
+	.nav {
+		order: 10;
+		width: 100%;
+		overflow-x: auto;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		margin-top: 4px;
+		padding-bottom: 2px;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.nav a,
+	.nav a.mat-mdc-button-base {
+		min-width: unset;
+		padding-inline: 10px;
+		height: 32px;
+		line-height: 32px;
+		font-size: 0.9rem;
+	}
+
+	.nav::-webkit-scrollbar {
+		height: 0;
+	}
+
+	.content {
+		padding-top: calc(var(--page-pad) + 10px);
+	}
+}

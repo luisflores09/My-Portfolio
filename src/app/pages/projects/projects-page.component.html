@@ -1,0 +1,30 @@
+<main class="page">
+  <section class="prose hero">
+    <p class="kicker">Selected work</p>
+    <h1>Projects</h1>
+    <p class="lead">Links to deployed apps and demos.</p>
+  </section>
+
+  <section class="projects-grid" aria-label="Project list">
+    @for (project of projects; track project.url) {
+      <mat-card class="project-card">
+        <mat-card-content>
+          <div class="project__name">{{ project.name }}</div>
+          <div class="project__desc">{{ project.description }}</div>
+        </mat-card-content>
+
+        <mat-card-actions align="end" class="project__actions">
+          <a
+            mat-flat-button
+            color="primary"
+            [href]="project.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </section>
+</main>

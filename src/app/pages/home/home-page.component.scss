@@ -1,0 +1,21 @@
+.heroGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.heroText {
+  min-width: min(520px, 100%);
+  text-align: center;
+}
+
+.avatar {
+  width: clamp(120px, 18vw, 200px);
+  height: clamp(120px, 18vw, 200px);
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
