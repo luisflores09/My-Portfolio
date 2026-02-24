@@ -9,9 +9,14 @@
 .contact-meta {
   margin: 0;
   color: var(--text-secondary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-self: center;
+  width: fit-content;
+  max-width: min(72ch, 100%);
+  text-align: center;
+}
+
+.contact-meta .inline-link {
+	margin-left: 0.6ch;
 }
 
 .inline-link {
