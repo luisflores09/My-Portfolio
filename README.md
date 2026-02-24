@@ -36,6 +36,30 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## CI/CD: Deploy to S3 on push
+
+This repo includes a basic GitHub Actions workflow that builds the Angular app and syncs `dist/my-portfolio/` to an S3 bucket on push to `master`/`main`.
+
+### 1) Add GitHub Secrets
+
+In your GitHub repo: **Settings → Secrets and variables → Actions → New repository secret**
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION` (example: `us-east-1`)
+- `S3_BUCKET` (bucket name only, example: `my-portfolio-site`)
+
+### 2) Configure the S3 bucket for a SPA
+
+If you use **S3 static website hosting**, set:
+
+- **Index document**: `index.html`
+- **Error document**: `index.html` (SPA route fallback)
+
+### 3) Push to deploy
+
+Any push to `master`/`main` will build and deploy via `.github/workflows/deploy-s3.yml`.
+
 ## Running unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
