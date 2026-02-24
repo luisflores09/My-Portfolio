@@ -32,6 +32,17 @@ jobs:
       - name: Build (production)
         run: npx ng build --configuration production
 
+      - name: Resolve build output directory
+        id: builddir
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -d "dist/my-portfolio/browser" ]]; then
+            echo "dir=dist/my-portfolio/browser" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=dist/my-portfolio" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -40,8 +51,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to S3
-        run: aws s3 sync dist/my-portfolio s3://${{ secrets.S3_BUCKET }} --delete
+        run: aws s3 sync "${{ steps.builddir.outputs.dir }}" s3://${{ secrets.S3_BUCKET }} --delete
 
       # Helps avoid “stale app shell” after deploy if a CDN/browser caches index.html.
       - name: Set no-cache on index.html
-        run: aws s3 cp dist/my-portfolio/index.html s3://${{ secrets.S3_BUCKET }}/index.html --cache-control "no-cache" --content-type "text/html" --metadata-directive REPLACE
+        run: aws s3 cp "${{ steps.builddir.outputs.dir }}/index.html" s3://${{ secrets.S3_BUCKET }}/index.html --cache-control "no-cache" --content-type "text/html" --metadata-directive REPLACE
