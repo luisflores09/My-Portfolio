@@ -6,31 +6,55 @@
   </section>
 
   <section class="prose section" aria-label="Contact methods">
-    <div class="contact-actions">
-      <a mat-flat-button color="primary" href="mailto:you@example.com">Email me</a>
-      <a
-        mat-stroked-button
-        href="https://www.linkedin.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        LinkedIn
-      </a>
-      <a
-        mat-stroked-button
-        href="https://github.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub
-      </a>
-    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <a mat-icon-button color="primary" href="mailto:iluisflores@yahoo.com" aria-label="Email">
+          <mat-icon aria-hidden="true">mail</mat-icon>
+        </a>
+        <a class="inline-link contact-link" href="mailto:iluisflores@yahoo.com">iluisflores&#64;yahoo.com</a>
+      </div>
 
-    <p class="contact-meta">
-      Email: <a class="inline-link" href="mailto:you@example.com">you&#64;example.com</a>
-    </p>
-    <p class="contact-meta">
-      GitHub: <a class="inline-link" href="https://github.com" target="_blank" rel="noopener noreferrer">&#64;your-handle</a>
-    </p>
+      <div class="contact-item">
+        <a
+          mat-icon-button
+          color="primary"
+          href="https://www.linkedin.com/in/luis-flores-estrada/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <mat-icon aria-hidden="true">work</mat-icon>
+        </a>
+        <a
+          class="inline-link contact-link"
+          href="https://www.linkedin.com/in/luis-flores-estrada/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <a
+          mat-icon-button
+          color="primary"
+          href="https://github.com/luisflores09"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <mat-icon aria-hidden="true">code</mat-icon>
+        </a>
+        <a
+          class="inline-link contact-link"
+          href="https://github.com/luisflores09"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
   </section>
 </main>
