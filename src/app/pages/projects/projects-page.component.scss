@@ -1,31 +1,141 @@
-.projects-grid {
-  width: min(100%, 980px);
+.projects-list {
+  width: min(100%, 1200px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
   gap: 16px;
 }
 
+@media (max-width: 560px) {
+  .projects-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 .project-card {
-  height: 100%;
+  text-align: left;
+}
+
+.project-card__content {
+  padding: 18px;
+}
+
+.project__header {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .project__name {
+  margin: 0;
   font-weight: 650;
   letter-spacing: -0.01em;
-  font-size: 1.15rem;
-}
-
-.project__desc {
-  margin-top: 8px;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 1.18rem;
+  line-height: 1.25;
 }
 
 .project__actions {
-  padding-inline: 16px;
-  padding-bottom: 16px;
-  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.project__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]) {
+  height: 34px;
+  padding-inline: 12px;
+}
+
+.project__grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .project__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project__actions {
+    justify-content: flex-start;
+  }
+}
+
+.project__sections {
+  margin-top: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.project__section h3 {
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.project__body {
+  margin: 0;
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 1.02rem;
+}
+
+.project__list {
+  margin: 0;
+  margin-top: 6px;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 1.02rem;
+}
+
+.project__placeholder {
+  margin: 0;
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 1.02rem;
+}
+
+.project__side {
+  display: grid;
+  gap: 12px;
+}
+
+.project__mediaSection h3 {
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.project__mediaLink {
+  display: block;
+  margin-top: 8px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.project__media {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 140px;
+}
+
+.project__media--contain {
+  object-fit: contain;
+}
+
+.project__media--cover {
+  object-fit: cover;
 }

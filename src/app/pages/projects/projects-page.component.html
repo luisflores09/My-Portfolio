@@ -2,28 +2,149 @@
   <section class="prose hero">
     <p class="kicker">Selected work</p>
     <h1>Projects</h1>
-    <p class="lead">Links to deployed apps and demos.</p>
+    <p class="lead">Write-ups for my key projects (details coming soon).</p>
   </section>
 
-  <section class="projects-grid" aria-label="Project list">
-    @for (project of projects; track project.url) {
+  <section class="projects-list" aria-label="Project list">
+    @for (project of projects; track project.id) {
       <mat-card class="project-card">
-        <mat-card-content>
-          <div class="project__name">{{ project.name }}</div>
-          <div class="project__desc">{{ project.description }}</div>
-        </mat-card-content>
+        <mat-card-content class="project-card__content">
+          <header class="project__header">
+            <h2 class="project__name">{{ project.name }}</h2>
 
-        <mat-card-actions align="end" class="project__actions">
-          <a
-            mat-flat-button
-            color="primary"
-            [href]="project.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open
-          </a>
-        </mat-card-actions>
+            <div class="project__actions" aria-label="Project links">
+              @if (project.repoUrl) {
+                <a mat-stroked-button [href]="project.repoUrl" target="_blank" rel="noopener noreferrer">Repo</a>
+              } @else {
+                <button mat-stroked-button disabled>Repo</button>
+              }
+
+              @if (project.deployedUrl) {
+                <a mat-flat-button color="primary" [href]="project.deployedUrl" target="_blank" rel="noopener noreferrer">Deployed</a>
+              } @else {
+                <button mat-flat-button color="primary" disabled>Deployed</button>
+              }
+
+              @if (project.recordingUrl) {
+                <a mat-stroked-button [href]="project.recordingUrl" target="_blank" rel="noopener noreferrer">Recording</a>
+              } @else {
+                <button mat-stroked-button disabled>Recording</button>
+              }
+            </div>
+          </header>
+
+          <div class="project__grid">
+            <div class="project__main">
+              <div class="project__sections">
+                <section class="project__section">
+              <h3>Purpose / goals</h3>
+              @if (project.purposeGoals) {
+                <p class="project__body">{{ project.purposeGoals }}</p>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+                </section>
+
+                <section class="project__section">
+              <h3>Overview of features</h3>
+              @if (project.features?.length) {
+                <ul class="project__list">
+                  @for (item of project.features; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+                </section>
+
+            @if (project.includeContribution) {
+              <section class="project__section">
+                <h3>Your specific contribution in the team</h3>
+                @if (project.contribution) {
+                  <p class="project__body">{{ project.contribution }}</p>
+                } @else {
+                  <p class="project__placeholder">TBD</p>
+                }
+              </section>
+            }
+
+                <section class="project__section">
+              <h3>Skills (technical and durable) this project demonstrates</h3>
+              @if (project.skills?.length) {
+                <ul class="project__list">
+                  @for (skill of project.skills; track skill) {
+                    <li>{{ skill }}</li>
+                  }
+                </ul>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+                </section>
+
+                <section class="project__section">
+              <h3>How does this project demonstrate those skills?</h3>
+              @if (project.skillsEvidence) {
+                <p class="project__body">{{ project.skillsEvidence }}</p>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+                </section>
+
+                <section class="project__section">
+              <h3>Your takeaways from doing this project</h3>
+              @if (project.takeaways) {
+                <p class="project__body">{{ project.takeaways }}</p>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+                </section>
+              </div>
+            </div>
+
+            <aside class="project__side" aria-label="Project media">
+              @if (project.diagramsWireframes) {
+                <section class="project__mediaSection">
+                  <h3>Wireframe</h3>
+                  <a
+                    class="project__mediaLink"
+                    [href]="project.diagramsWireframes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      class="project__media project__media--contain"
+                      [src]="project.diagramsWireframes"
+                      [alt]="project.name + ' wireframe'"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                </section>
+              }
+
+              @if (project.screenshotsGifs) {
+                <section class="project__mediaSection">
+                  <h3>Screenshot</h3>
+                  <a
+                    class="project__mediaLink"
+                    [href]="project.screenshotsGifs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      class="project__media project__media--cover"
+                      [src]="project.screenshotsGifs"
+                      [alt]="project.name + ' screenshot'"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                </section>
+              }
+            </aside>
+          </div>
+        </mat-card-content>
       </mat-card>
     }
   </section>
