@@ -1,23 +1,35 @@
 .projects-list {
-  width: min(100%, 1200px);
+  width: 100%;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 420px) {
   .projects-list {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 }
 
 .project-card {
   text-align: left;
+  border-radius: calc(var(--radius-lg) + 4px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .project-card {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
 }
 
 .project-card__content {
-  padding: 18px;
+  padding: 16px;
 }
 
 .project__header {
@@ -47,41 +59,32 @@
   padding-inline: 12px;
 }
 
-.project__grid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 16px;
-  align-items: start;
-}
-
 @media (max-width: 900px) {
-  .project__grid {
-    grid-template-columns: 1fr;
-  }
-
   .project__actions {
     justify-content: flex-start;
   }
 }
 
-.project__sections {
-  margin-top: 0;
+.project__accordion {
+  margin-top: 12px;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
-.project__section h3 {
-  margin: 0;
+.project__panel {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  box-shadow: none;
+}
+
+.project__panel :is(.mat-expansion-panel-header) {
   font-weight: 650;
-  letter-spacing: -0.01em;
-  font-size: 1rem;
-  line-height: 1.25;
 }
 
 .project__body {
   margin: 0;
-  margin-top: 6px;
   color: var(--text-secondary);
   line-height: 1.55;
   font-size: 1.02rem;
@@ -89,7 +92,6 @@
 
 .project__list {
   margin: 0;
-  margin-top: 6px;
   padding-left: 18px;
   color: var(--text-secondary);
   line-height: 1.55;
@@ -98,28 +100,25 @@
 
 .project__placeholder {
   margin: 0;
-  margin-top: 6px;
   color: var(--text-secondary);
   line-height: 1.55;
   font-size: 1.02rem;
 }
 
-.project__side {
+.project__mediaGrid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-.project__mediaSection h3 {
-  margin: 0;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  font-size: 1rem;
-  line-height: 1.25;
+@media (max-width: 560px) {
+  .project__mediaGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project__mediaLink {
   display: block;
-  margin-top: 8px;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--card-border);
@@ -129,7 +128,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 140px;
+  max-height: 120px;
 }
 
 .project__media--contain {

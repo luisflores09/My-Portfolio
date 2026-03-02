@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 type Project = {
     id: string;
@@ -25,7 +26,7 @@ type Project = {
 
 @Component({
     selector: 'app-projects-page',
-    imports: [MatCardModule, MatButtonModule],
+    imports: [MatCardModule, MatButtonModule, MatExpansionModule],
     templateUrl: './projects-page.component.html',
     styleUrl: './projects-page.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -34,10 +35,10 @@ export class ProjectsPageComponent {
     projects: Project[] = [
         {
             id: 'inventory-application',
-            name: 'Inventory Application',
+            name: 'Inventory Application (Full-Stack Project)',
             repoUrl: "https://github.com/Runtime-Terror123/InventoryApp",
             deployedUrl: "https://inventoryapp-r8aa.onrender.com/",
-            recordingUrl: undefined,
+            recordingUrl: "https://www.youtube.com/watch?v=BE4Er_-gc0o",
             includeContribution: true,
             purposeGoals: "We are a team of developers for an e-commerce company. The Engineering team is rebuilding their inventory tracking app from the ground up. Your team has been tasked with creating a Full-Sack (front and back end) RESTful CRUD application to track the items.",
             features: [
@@ -71,22 +72,45 @@ export class ProjectsPageComponent {
         },
         {
             id: 'final-bootcamp-project',
-            name: 'Final Bootcamp Project',
-            repoUrl: undefined,
+            name: 'DrivingEd-App (Final Bootcamp Project)',
+            repoUrl: "https://github.com/luisflores09/DrivingEd-App",
             deployedUrl: undefined,
-            recordingUrl: undefined,
-            includeContribution: false,
-            purposeGoals: undefined,
-            features: undefined,
-            skills: undefined,
-            skillsEvidence: undefined,
-            takeaways: undefined,
-            diagramsWireframes: undefined,
-            screenshotsGifs: undefined
+            recordingUrl: "https://www.youtube.com/watch?v=xzlWR1KAluA",
+            includeContribution: true,
+            purposeGoals:
+                'I built DrivingEd-App to streamline how a driving school manages people (students/instructors/admins) and schedules lessons, replacing manual/phone-based booking with a simple web workflow. The goal was to deliver a complete full-stack .NET app end-to-end (database → API → UI) and deploy it to a real environment.',
+            features: [
+                'ASP.NET Core Web API with CRUD endpoints for users and appointments (list, view by ID, update, delete).',
+                'Role-based user listing (for example, retrieving instructors separately) to support the scheduling flow.',
+                'Blazor Server UI with registration + form validation, plus user list/detail pages with edit and delete actions.',
+                'Scheduling workflow: instructors list and an appointment-creation modal to book lessons.',
+                'Appointments page showing scheduled lessons with linked instructor/student details.',
+                'SQL Server + EF Core migrations with seed data, plus environment-based configuration (local vs hosted API).'
+            ],
+            contribution:
+                'Solo project: I designed and implemented the full stack end-to-end (database schema + EF Core models/migrations, REST controllers, and Blazor pages/components). I also handled UI ↔ API integration (HTTP calls + config-driven base URLs) and initial Azure deployment connectivity for the API and database.',
+            skills: [
+                'Technical: ASP.NET Core Web API (routing, controllers, request/response patterns)',
+                'Technical: Entity Framework Core + SQL Server (DbContext, relationships, migrations, seeding)',
+                'Technical: Blazor Server UI (components/pages, data binding, validation)',
+                'Technical: API integration from the UI (async calls, JSON serialization, error handling)',
+                'Technical: Environment-based configuration (local vs hosted API)',
+                'Technical: Intro cloud deployment exposure (Azure App Service + Azure SQL)',
+                'Durable: End-to-end ownership and prioritization (shipping an MVP)',
+                'Durable: Problem decomposition (data model → API → UI workflows)',
+                'Durable: Debugging and iteration across the full stack',
+                'Durable: Making scope tradeoffs to deliver'
+            ],
+            skillsEvidence:
+                'This project shows backend engineering (modeling users/appointments, configuring relationships, running migrations, and exposing REST endpoints) and frontend engineering (turning endpoints into real workflows like registration, listing/editing, and scheduling). It also shows integration and delivery skills by using config-driven API URLs, consuming real appointment objects with linked user data, and seeding the database so the app can be demoed quickly in both local and deployed environments.',
+            takeaways:
+                'Building a clean data model and API contract early made the Blazor UI work much faster and reduced rework. I also learned how important environment configuration is when moving from local development to a hosted deployment. If I continued, I would focus on production readiness (auth, secure password storage, secrets management, and tighter validation/error handling).',
+            diagramsWireframes: '/DrivingEd-App-data-model.svg',
+            screenshotsGifs: '/DrivingEd-App.jpeg'
         },
         {
             id: 'back-end-module-project',
-            name: 'Back End Module Project',
+            name: 'EchoPlay-API (Back End Module Project)',
             repoUrl: undefined,
             deployedUrl: undefined,
             recordingUrl: undefined,
@@ -102,7 +126,7 @@ export class ProjectsPageComponent {
         },
         {
             id: 'front-end-module-project',
-            name: 'Front End Module Project',
+            name: 'EchoPlay (Front End Module Project)',
             repoUrl: undefined,
             deployedUrl: undefined,
             recordingUrl: undefined,
@@ -118,7 +142,7 @@ export class ProjectsPageComponent {
         },
         {
             id: 'deployment-module-project',
-            name: 'Deployment Module Project',
+            name: 'Pixel Forge (Deployment Module Project)',
             repoUrl: undefined,
             deployedUrl: undefined,
             recordingUrl: undefined,

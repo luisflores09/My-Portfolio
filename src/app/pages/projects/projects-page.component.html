@@ -33,20 +33,22 @@
             </div>
           </header>
 
-          <div class="project__grid">
-            <div class="project__main">
-              <div class="project__sections">
-                <section class="project__section">
-              <h3>Purpose / goals</h3>
+          <mat-accordion class="project__accordion" multi>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Purpose / goals</mat-panel-title>
+              </mat-expansion-panel-header>
               @if (project.purposeGoals) {
                 <p class="project__body">{{ project.purposeGoals }}</p>
               } @else {
                 <p class="project__placeholder">TBD</p>
               }
-                </section>
+            </mat-expansion-panel>
 
-                <section class="project__section">
-              <h3>Overview of features</h3>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Overview of features</mat-panel-title>
+              </mat-expansion-panel-header>
               @if (project.features?.length) {
                 <ul class="project__list">
                   @for (item of project.features; track item) {
@@ -56,21 +58,25 @@
               } @else {
                 <p class="project__placeholder">TBD</p>
               }
-                </section>
+            </mat-expansion-panel>
 
             @if (project.includeContribution) {
-              <section class="project__section">
-                <h3>Your specific contribution in the team</h3>
+              <mat-expansion-panel class="project__panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Your specific contribution</mat-panel-title>
+                </mat-expansion-panel-header>
                 @if (project.contribution) {
                   <p class="project__body">{{ project.contribution }}</p>
                 } @else {
                   <p class="project__placeholder">TBD</p>
                 }
-              </section>
+              </mat-expansion-panel>
             }
 
-                <section class="project__section">
-              <h3>Skills (technical and durable) this project demonstrates</h3>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Skills demonstrated</mat-panel-title>
+              </mat-expansion-panel-header>
               @if (project.skills?.length) {
                 <ul class="project__list">
                   @for (skill of project.skills; track skill) {
@@ -80,70 +86,74 @@
               } @else {
                 <p class="project__placeholder">TBD</p>
               }
-                </section>
+            </mat-expansion-panel>
 
-                <section class="project__section">
-              <h3>How does this project demonstrate those skills?</h3>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>How it demonstrates those skills</mat-panel-title>
+              </mat-expansion-panel-header>
               @if (project.skillsEvidence) {
                 <p class="project__body">{{ project.skillsEvidence }}</p>
               } @else {
                 <p class="project__placeholder">TBD</p>
               }
-                </section>
+            </mat-expansion-panel>
 
-                <section class="project__section">
-              <h3>Your takeaways from doing this project</h3>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Takeaways</mat-panel-title>
+              </mat-expansion-panel-header>
               @if (project.takeaways) {
                 <p class="project__body">{{ project.takeaways }}</p>
               } @else {
                 <p class="project__placeholder">TBD</p>
               }
-                </section>
-              </div>
-            </div>
+            </mat-expansion-panel>
 
-            <aside class="project__side" aria-label="Project media">
-              @if (project.diagramsWireframes) {
-                <section class="project__mediaSection">
-                  <h3>Wireframe</h3>
-                  <a
-                    class="project__mediaLink"
-                    [href]="project.diagramsWireframes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      class="project__media project__media--contain"
-                      [src]="project.diagramsWireframes"
-                      [alt]="project.name + ' wireframe'"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                </section>
-              }
+            @if (project.diagramsWireframes || project.screenshotsGifs) {
+              <mat-expansion-panel class="project__panel">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Media</mat-panel-title>
+                </mat-expansion-panel-header>
 
-              @if (project.screenshotsGifs) {
-                <section class="project__mediaSection">
-                  <h3>Screenshot</h3>
-                  <a
-                    class="project__mediaLink"
-                    [href]="project.screenshotsGifs"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      class="project__media project__media--cover"
-                      [src]="project.screenshotsGifs"
-                      [alt]="project.name + ' screenshot'"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                </section>
-              }
-            </aside>
-          </div>
+                <div class="project__mediaGrid">
+                  @if (project.diagramsWireframes) {
+                    <a
+                      class="project__mediaLink"
+                      [href]="project.diagramsWireframes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        class="project__media project__media--contain"
+                        [src]="project.diagramsWireframes"
+                        [alt]="project.name + ' diagram'"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                  }
+
+                  @if (project.screenshotsGifs) {
+                    <a
+                      class="project__mediaLink"
+                      [href]="project.screenshotsGifs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        class="project__media project__media--cover"
+                        [src]="project.screenshotsGifs"
+                        [alt]="project.name + ' screenshot'"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                  }
+                </div>
+              </mat-expansion-panel>
+            }
+          </mat-accordion>
         </mat-card-content>
       </mat-card>
     }
