@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="EchoPlay-API models diagram">
+  <defs>
+    <style>
+      .box { fill: #fff; stroke: #111; stroke-width: 2; }
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: 700; fill: #111; }
+      .field { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #111; }
+      .arrow { stroke: #111; stroke-width: 2; fill: none; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #111; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="40" y="45" class="title">EchoPlay-API — EF Core Models</text>
+
+  <!-- User -->
+  <rect x="60" y="90" width="320" height="140" class="box" />
+  <text x="80" y="120" class="title">User</text>
+  <text x="80" y="150" class="field">Id: int</text>
+  <text x="80" y="172" class="field">Email: string (required, unique)</text>
+  <text x="80" y="194" class="field">IsAdmin: bool</text>
+
+  <!-- FavoriteCategory -->
+  <rect x="60" y="300" width="320" height="190" class="box" />
+  <text x="80" y="330" class="title">FavoriteCategory</text>
+  <text x="80" y="360" class="field">Id: int</text>
+  <text x="80" y="382" class="field">UserId: int (required)</text>
+  <text x="80" y="404" class="field">Name: string (required; unique per user)</text>
+  <text x="80" y="426" class="field">Description: string?</text>
+  <text x="80" y="448" class="field">Color: string</text>
+  <text x="80" y="470" class="field">CreatedAt: DateTime</text>
+
+  <!-- UserSearchHistory -->
+  <rect x="60" y="530" width="320" height="150" class="box" />
+  <text x="80" y="560" class="title">UserSearchHistory</text>
+  <text x="80" y="590" class="field">Id: int</text>
+  <text x="80" y="612" class="field">UserId: int</text>
+  <text x="80" y="634" class="field">Query: string</text>
+  <text x="80" y="656" class="field">CreatedAt / UpdatedAt: DateTime</text>
+
+  <!-- Favorite -->
+  <rect x="520" y="180" width="380" height="260" class="box" />
+  <text x="540" y="210" class="title">Favorite</text>
+  <text x="540" y="240" class="field">Id: int</text>
+  <text x="540" y="262" class="field">UserId: int (required)</text>
+  <text x="540" y="284" class="field">EntityType: FavoriteEntityType (required)</text>
+  <text x="540" y="306" class="field">SpotifyId: string (required)</text>
+  <text x="540" y="328" class="field">EntityName: string (required)</text>
+  <text x="540" y="350" class="field">ArtistName / AlbumName: string?</text>
+  <text x="540" y="372" class="field">Duration: int?</text>
+  <text x="540" y="394" class="field">ImageUrl: string?</text>
+  <text x="540" y="416" class="field">CategoryId: int?</text>
+  <text x="540" y="438" class="field">CreatedAt: DateTime</text>
+
+  <!-- FavoriteEntityType enum -->
+  <rect x="960" y="190" width="200" height="140" class="box" />
+  <text x="980" y="220" class="title">FavoriteEntityType</text>
+  <text x="980" y="250" class="field">Track</text>
+  <text x="980" y="272" class="field">Artist</text>
+  <text x="980" y="294" class="field">Album</text>
+
+  <!-- Relationships -->
+  <!-- User (1) -> Favorites (*) -->
+  <path d="M 380 160 C 430 160, 470 220, 520 260" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="410" y="150" class="label">1</text>
+  <text x="490" y="250" class="label">*</text>
+  <text x="410" y="178" class="label">UserId</text>
+
+  <!-- User (1) -> FavoriteCategories (*) -->
+  <path d="M 220 230 L 220 300" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="232" y="260" class="label">1 → *</text>
+
+  <!-- User (1) -> UserSearchHistory (*) -->
+  <path d="M 220 490 L 220 530" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="232" y="520" class="label">1 → *</text>
+
+  <!-- FavoriteCategory (0..1) -> Favorites (*) -->
+  <path d="M 380 390 C 430 390, 460 360, 520 340" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="392" y="382" class="label">0..1</text>
+  <text x="495" y="344" class="label">*</text>
+  <text x="410" y="410" class="label">CategoryId</text>
+
+  <!-- Favorite -> FavoriteEntityType -->
+  <path d="M 900 260 L 960 260" class="arrow" marker-end="url(#arrowhead)" />
+  <text x="920" y="250" class="label">enum</text>
+
+  <!-- Notes -->
+  <text x="520" y="500" class="label">DB constraints (from AppDbContext):</text>
+  <text x="520" y="520" class="label">• Favorites unique: (UserId, EntityType, SpotifyId)</text>
+  <text x="520" y="540" class="label">• Category name unique per user: (UserId, Name)</text>
+  <text x="520" y="560" class="label">• Favorite.EntityType stored as string</text>
+</svg>

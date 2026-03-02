@@ -88,7 +88,7 @@ export class ProjectsPageComponent {
                 'SQL Server + EF Core migrations with seed data, plus environment-based configuration (local vs hosted API).'
             ],
             contribution:
-                'Solo project: I designed and implemented the full stack end-to-end (database schema + EF Core models/migrations, REST controllers, and Blazor pages/components). I also handled UI ↔ API integration (HTTP calls + config-driven base URLs) and initial Azure deployment connectivity for the API and database.',
+                'I designed and implemented the full stack end-to-end (database schema + EF Core models/migrations, REST controllers, and Blazor pages/components). I also handled UI ↔ API integration (HTTP calls + config-driven base URLs) and initial Azure deployment connectivity for the API and database.',
             skills: [
                 'Technical: ASP.NET Core Web API (routing, controllers, request/response patterns)',
                 'Technical: Entity Framework Core + SQL Server (DbContext, relationships, migrations, seeding)',
@@ -111,34 +111,74 @@ export class ProjectsPageComponent {
         {
             id: 'back-end-module-project',
             name: 'EchoPlay-API (Back End Module Project)',
-            repoUrl: undefined,
+            repoUrl: "https://github.com/EchoSync-369/EchoPlay-API",
             deployedUrl: undefined,
-            recordingUrl: undefined,
+            recordingUrl: "https://www.youtube.com/watch?v=KRyscIFtUDk",
             includeContribution: true,
-            purposeGoals: undefined,
-            features: undefined,
-            contribution: undefined,
-            skills: undefined,
-            skillsEvidence: undefined,
-            takeaways: undefined,
-            diagramsWireframes: undefined,
+            purposeGoals:
+                'I built EchoPlay-API as the backend for my EchoPlay app, focused on authenticating users via Spotify and persisting user-specific data (favorites, categories, and search history) in SQL Server. The goal was a clean, front-end-friendly REST API secured with JWT authorization so an Angular client can call protected endpoints after login.',
+            features: [
+                'Spotify-based login: accepts a Spotify access token, fetches the user profile from the Spotify “/me” endpoint, creates the user on first login, and returns an app JWT for subsequent calls.',
+                'JWT auth wired into the ASP.NET Core pipeline with protected endpoints enforced via authorization attributes.',
+                'Favorites system for tracks/artists/albums with duplicate prevention and optional categorization.',
+                'Category CRUD for organizing favorites, including per-user uniqueness of category names.',
+                'Per-user search history with deduplication and recency ordering, plus an admin-only endpoint to view another user’s history.',
+                'EF Core code-first + migrations with relational constraints (unique indexes, delete behaviors) to keep data consistent.'
+            ],
+            contribution:
+                'I partnered with another developer to build the API. My contributions included the API design, data modeling, EF Core configuration/migrations, authentication/authorization wiring, controller + DTO implementation, and runtime configuration (CORS/logging/JWT wiring).',
+            skills: [
+                'Technical: ASP.NET Core Web API (.NET 9), RESTful endpoint design, DTO validation',
+                'Technical: JWT authentication/authorization',
+                'Technical: EF Core + SQL Server, code-first migrations',
+                'Technical: External API integration (Spotify)',
+                'Technical: Request/diagnostic logging and runtime configuration',
+                'Durable: Collaborative delivery and turning requirements into a coherent data model + API',
+                'Durable: Iterative development (migrations over time) and designing for data integrity (unique constraints, delete rules, deduplication)'
+            ],
+            skillsEvidence:
+                'This project demonstrates backend delivery by integrating an external identity provider (Spotify) and issuing JWTs, then enforcing protected endpoints for user-specific data. It also shows “defense in depth” by encoding integrity rules in the database layer (unique indexes, delete behaviors) and using DTOs so the frontend depends on stable API contracts rather than EF entities.',
+            takeaways:
+                'I learned that enforcing integrity in the database (unique indexes + FK rules) makes the API simpler and more reliable. I also gained a better feel for real-world auth tradeoffs (token lifetime, logout/revocation) and for designing endpoints around frontend needs (summary/grouped views and deduped history instead of pushing all computation to the client).',
+            diagramsWireframes: '/EchoPlay-API-data-models.svg',
             screenshotsGifs: undefined
         },
         {
             id: 'front-end-module-project',
             name: 'EchoPlay (Front End Module Project)',
-            repoUrl: undefined,
+            repoUrl: "https://github.com/EchoSync-369/EchoPlay",
             deployedUrl: undefined,
-            recordingUrl: undefined,
+            recordingUrl: "https://www.youtube.com/watch?v=rPibrvJNnZU",
             includeContribution: true,
-            purposeGoals: undefined,
-            features: undefined,
-            contribution: undefined,
-            skills: undefined,
-            skillsEvidence: undefined,
-            takeaways: undefined,
-            diagramsWireframes: undefined,
-            screenshotsGifs: undefined
+            purposeGoals:
+                'I built EchoPlay to be a clean, responsive music discovery app that makes it fast to find new music, search across Spotify content, and play/share what I find without leaving the experience. My goals were to practice real-world Angular architecture (routing, services, guards, reactive state), integrate Spotify end-to-end, and ship a portfolio-ready UI with strong UX, theming, and test coverage.',
+            features: [
+                '“New Releases” experience that pulls Spotify’s latest albums and displays them in a responsive carousel.',
+                'Universal search flow that queries Spotify and shows categorized results (albums, artists, playlists, tracks), with direct routing into a player view.',
+                'Embedded Spotify player page with deep-linking (`/player/:type/:id`) and theme-aware light/dark embed behavior.',
+                'Authentication + route protection using guards, including token storage and recovery behaviors.',
+                'Favorites functionality (including a dashboard view) backed by an authenticated API, with add/remove actions directly in the UI.',
+                'Search history suggestions in the search bar (recent searches with quick re-run and delete).'
+            ],
+            contribution:
+                'I designed and implemented the front-end architecture (routes, standalone components, services, and UI composition). I integrated Spotify OAuth + API calls with token handling in localStorage and wired auth state into navigation. I built reusable UI components (navbar, carousel, search bar, theming toggle, favorites actions) and connected them to real data flows, then set up Jest unit testing to keep the codebase reliable as features grew.',
+            skills: [
+                'Technical: Angular 19 (standalone components), routing, route guards, HttpClient',
+                'Technical: RxJS reactive state (Subjects/BehaviorSubjects, subscriptions, `combineLatest`)',
+                'Technical: TypeScript modeling and mapping Spotify API responses into UI-friendly shapes',
+                'Technical: OAuth/token workflows and authenticated request patterns',
+                'Technical: PrimeNG component integration and responsive UI patterns',
+                'Technical: Theming via CSS + DOM class toggles and embed/page-level UX integration',
+                'Technical: Unit testing with Jest',
+                'Durable: Product thinking (feature prioritization + UX iteration)',
+                'Durable: Debugging auth/API integration issues and designing maintainable service boundaries'
+            ],
+            skillsEvidence:
+                'I used Angular routing + guards to enforce authenticated vs unauthenticated navigation and to control layout behavior (like contextual search visibility). I built service-based reactive state (auth and favorites) so components react to changes instead of re-fetching everywhere, and I handled real integration constraints (token expiration/401 behavior, persistence, and async loading states) with UX patterns like loading indicators and error handling.',
+            takeaways:
+                'I learned how quickly complexity grows when auth + third-party APIs + UI state intersect, and why clear separation between API services, state, and presentation components matters. I got better at designing for resilience (token failures, null/partial API data, async race conditions), and reinforced that polish (responsive layout, theming, loading states, navigation clarity) is what makes an app feel complete.',
+            diagramsWireframes: '/EchoPlay-App-data-models.svg',
+            screenshotsGifs: '/EchoPlay-App.jpeg'
         },
         {
             id: 'deployment-module-project',
