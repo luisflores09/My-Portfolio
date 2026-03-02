@@ -183,18 +183,39 @@ export class ProjectsPageComponent {
         {
             id: 'deployment-module-project',
             name: 'Pixel Forge (Deployment Module Project)',
-            repoUrl: undefined,
-            deployedUrl: undefined,
-            recordingUrl: undefined,
+            repoUrl: "https://github.com/PixelForgeArcade/PixelForgeApp",
+            deployedUrl: "https://pixelforge-frontend-latest.onrender.com/",
+            recordingUrl: "https://www.youtube.com/watch?v=NjoCwuKmnZI",
             includeContribution: true,
-            purposeGoals: undefined,
-            features: undefined,
-            contribution: undefined,
-            skills: undefined,
-            skillsEvidence: undefined,
-            takeaways: undefined,
-            diagramsWireframes: undefined,
-            screenshotsGifs: undefined
+            purposeGoals:
+                'I built PixelForge as a small full-stack Angular + Flask app to prove out a real-world authentication flow (Steam OpenID), secure session handling across separate frontend/backend domains, and an end-to-end DevOps pipeline (tests → Docker build → push → deploy). My goal was to make deployments repeatable and safe so every change is tested, packaged the same way, and promoted automatically to production.',
+            features: [
+                'Steam OpenID login with backend OpenID verification and a server-side session established in Flask (`app.py`).',
+                'Session-based auth checks from the frontend using credentialed requests (`fetch(..., { credentials: \'include\' })`) to confirm login status and fetch profile data (`landing-page.component.ts`).',
+                'Steam profile retrieval via Steam Web API (GetPlayerSummaries) returning a curated “public profile” JSON object to the frontend (`app.py`).',
+                'Containerized frontend + backend: multi-stage Angular build served by Nginx with SPA routing + long-term static asset caching (`Dockerfile`, `nginx.conf`), and Flask served via Gunicorn with `$PORT` support (`Dockerfile`).',
+                'CI/CD workflow that runs unit tests + production build on PRs/pushes, then on `master` builds/pushes a Docker image and triggers a Render deploy hook (`build.yml`).'
+            ],
+            contribution:
+                'Solo development: I built the Angular app and Flask API end-to-end, implemented Steam auth + session behavior, containerized both services, and created the CI/CD pipeline. I also wrote the setup/deployment documentation and structured the repo to be easy to run locally or deploy remotely.',
+            skills: [
+                'Technical: Angular (standalone components + routing) and frontend architecture',
+                'Technical: Flask API design and session-based authentication',
+                'Technical: Steam OpenID integration and external API consumption',
+                'Technical: Secure cookie/session configuration, credentialed CORS across domains',
+                'Technical: Docker multi-stage builds and runtime packaging',
+                'Technical: Nginx SPA routing + caching headers',
+                'Technical: GitHub Actions CI/CD, secrets management, and environment injection via build args',
+                'Durable: End-to-end ownership and debugging distributed frontend ↔ backend issues',
+                'Durable: Security-minded thinking (cookie flags + cross-site behavior) and clear documentation',
+                'Durable: Designing for automation and repeatability'
+            ],
+            skillsEvidence:
+                'I handled the “separate domains” deployment correctly by enabling credentialed CORS and configuring session cookies for cross-site usage (for example, `SameSite=None`, `Secure`, `HttpOnly`) in the backend (`app.py`). I set up release quality gates by running tests and a production build before any deployment, and packaged the frontend with a multi-stage Docker build served via Nginx with SPA routing and caching headers (`Dockerfile`, `nginx.conf`). I also injected the production backend URL at build time so the container build stays reproducible across environments.',
+            takeaways:
+                'I learned that authentication complexity shows up most after deployment: cross-site cookies, CORS, redirects, and environment configuration all have to align. I also learned to treat CI/CD as part of the product—shipping immutable Docker images with tests/builds as gates made deployments easier to reason about. Finally, I reinforced the value of small, well-documented systems with secure defaults and automation.',
+            diagramsWireframes: '/pixel-forge-models.svg',
+            screenshotsGifs: '/Pixel-Forge-App.jpeg'
         }
     ];
 }
