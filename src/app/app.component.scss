@@ -34,6 +34,51 @@
 	margin: 0 auto;
 }
 
+// Modernize the dark-mode control (less “boxy”, more chip-like).
+.topbar mat-slide-toggle {
+	padding: 6px 10px;
+	border-radius: 999px;
+	border: 1px solid color-mix(in srgb, var(--card-border) 75%, transparent);
+	background: color-mix(in srgb, var(--nav-hover-bg) 70%, transparent);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.topbar mat-slide-toggle:hover {
+	background: color-mix(in srgb, var(--nav-hover-bg) 88%, transparent);
+}
+
+.topbar mat-slide-toggle:focus-within {
+	outline: 2px solid color-mix(in srgb, var(--mat-sys-primary) 55%, transparent);
+	outline-offset: 2px;
+}
+
+// Angular Material slide-toggle renders an MDC switch internally.
+// Use ::ng-deep to style internal pieces without changing markup.
+// Avoid overriding size variables here (they can throw off thumb alignment).
+.topbar ::ng-deep .mat-mdc-slide-toggle {
+	--mdc-switch-track-shape: 999px;
+	--mdc-switch-handle-shape: 999px;
+}
+
+.topbar ::ng-deep .mat-mdc-slide-toggle .mdc-switch__track {
+	border-radius: 999px;
+}
+
+.topbar ::ng-deep .mat-mdc-slide-toggle .mdc-switch__handle,
+.topbar ::ng-deep .mat-mdc-slide-toggle .mdc-switch__handle-track {
+	border-radius: 999px;
+}
+
+.topbar ::ng-deep .mat-mdc-slide-toggle .mdc-switch__handle {
+	box-shadow: 0 10px 24px color-mix(in srgb, var(--text-primary) 18%, transparent);
+}
+
+.topbar ::ng-deep .mat-mdc-slide-toggle .mdc-label {
+	font-weight: 550;
+	letter-spacing: 0.01em;
+}
+
 @media (max-width: 720px) {
 	.topbar {
 		height: auto;
@@ -62,6 +107,7 @@
 		margin-left: 8px;
 		white-space: nowrap;
 		font-size: 0.9rem;
+		padding: 5px 9px;
 	}
 
 	.nav {
