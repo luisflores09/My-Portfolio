@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-label="Color Critters model diagram">
+  <defs>
+    <style>
+      .title { font: 700 28px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: #111; }
+      .subtitle { font: 400 14px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: #444; }
+      .box { fill: #fff; stroke: #111; stroke-width: 2; rx: 12; }
+      .hdr { fill: #111; }
+      .hdrText { font: 700 16px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; fill: #fff; }
+      .field { font: 14px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; fill: #111; }
+      .note { font: 12px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; fill: #444; }
+      .rel { stroke: #111; stroke-width: 2; fill: none; }
+      .relDashed { stroke: #111; stroke-width: 2; fill: none; stroke-dasharray: 6 6; }
+      .label { font: 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; fill: #111; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="760" fill="#fff" />
+
+  <text x="40" y="60" class="title">Color Critters — Models</text>
+  <text x="40" y="88" class="subtitle">Based on TypeScript interfaces in src/app/models/critter.model.ts</text>
+
+  <!-- GameState -->
+  <rect x="60" y="140" width="420" height="260" class="box" />
+  <rect x="60" y="140" width="420" height="46" class="hdr" />
+  <text x="80" y="170" class="hdrText">interface GameState</text>
+  <text x="80" y="214" class="field">critters: Critter[]</text>
+  <text x="80" y="240" class="field">targetAnimal: string</text>
+  <text x="80" y="266" class="field">score: number</text>
+  <text x="80" y="292" class="field">gameActive: boolean</text>
+  <text x="80" y="318" class="field">celebrationMode: boolean</text>
+  <text x="80" y="356" class="note">State published via RxJS BehaviorSubject in GameService</text>
+
+  <!-- Critter -->
+  <rect x="720" y="140" width="420" height="320" class="box" />
+  <rect x="720" y="140" width="420" height="46" class="hdr" />
+  <text x="740" y="170" class="hdrText">interface Critter</text>
+  <text x="740" y="214" class="field">id: number</text>
+  <text x="740" y="240" class="field">animal: string</text>
+  <text x="740" y="266" class="field">color: string</text>
+  <text x="740" y="292" class="field">x: number</text>
+  <text x="740" y="318" class="field">y: number</text>
+  <text x="740" y="344" class="field">isCorrect: boolean</text>
+  <text x="740" y="370" class="field">isAnimating: boolean</text>
+  <text x="740" y="410" class="note">Rendered as a tappable emoji with a colored background</text>
+
+  <!-- GameAnimal -->
+  <rect x="60" y="470" width="520" height="210" class="box" />
+  <rect x="60" y="470" width="520" height="46" class="hdr" />
+  <text x="80" y="500" class="hdrText">interface GameAnimal</text>
+  <text x="80" y="544" class="field">name: string</text>
+  <text x="80" y="570" class="field">emoji: string</text>
+  <text x="80" y="596" class="field">soundName: string</text>
+  <text x="80" y="636" class="note">Configured list in GameService (e.g., dog/cat/rabbit…)</text>
+
+  <!-- GameColor -->
+  <rect x="660" y="520" width="480" height="160" class="box" />
+  <rect x="660" y="520" width="480" height="46" class="hdr" />
+  <text x="680" y="550" class="hdrText">interface GameColor</text>
+  <text x="680" y="594" class="field">name: string</text>
+  <text x="680" y="620" class="field">hex: string</text>
+  <text x="680" y="646" class="field">emoji: string</text>
+
+  <!-- Relationships -->
+  <!-- GameState contains Critters -->
+  <path d="M480 214 C560 214, 640 214, 720 214" class="rel" marker-end="url(#arrow)" />
+  <text x="525" y="198" class="label">contains 0..*</text>
+
+  <!-- GameState.targetAnimal relates to GameAnimal.name -->
+  <path d="M260 240 C260 340, 220 410, 200 470" class="relDashed" marker-end="url(#arrow)" />
+  <text x="280" y="360" class="label">targetAnimal == GameAnimal.name</text>
+
+  <!-- Critter.animal relates to GameAnimal.emoji -->
+  <path d="M740 240 C610 240, 520 310, 420 470" class="relDashed" marker-end="url(#arrow)" />
+  <text x="560" y="316" class="label">animal == GameAnimal.emoji</text>
+
+  <!-- Critter.color relates to GameColor.name -->
+  <path d="M860 266 C900 360, 880 450, 860 520" class="relDashed" marker-end="url(#arrow)" />
+  <text x="880" y="430" class="label">color == GameColor.name</text>
+
+  <!-- Footer -->
+  <text x="40" y="730" class="subtitle">Tip: embed with &lt;img src=&quot;models-diagram.svg&quot; /&gt; on GitHub Pages (docs/)</text>
+</svg>

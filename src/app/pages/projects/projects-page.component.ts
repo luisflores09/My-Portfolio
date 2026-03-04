@@ -216,6 +216,41 @@ export class ProjectsPageComponent {
                 'I learned that authentication complexity shows up most after deployment: cross-site cookies, CORS, redirects, and environment configuration all have to align. I also learned to treat CI/CD as part of the product—shipping immutable Docker images with tests/builds as gates made deployments easier to reason about. Finally, I reinforced the value of small, well-documented systems with secure defaults and automation.',
             diagramsWireframes: '/pixel-forge-models.svg',
             screenshotsGifs: '/Pixel-Forge-App.jpeg'
-        }
+        },
+        {
+            id: 'color-critters',
+            name: 'Color-Critters (Kids Mini Game)',
+            repoUrl: "https://github.com/luisflores09/Color-Critters",
+            deployedUrl: "http://color-critters.s3-website.us-east-2.amazonaws.com/",
+            recordingUrl: undefined,
+            includeContribution: true,
+            purposeGoals:
+                'I built Color-Critters as a simple, kid-friendly, touch-first mini game where players learn animal names through repetition, visual cues (emoji + color), and immediate sound/voice feedback. The goal was a fast, rewarding loop (tap → feedback → score) that works well on mobile browsers, including around common audio restrictions.',
+            features: [
+                'Kids Games Hub main menu with a playable Color-Critters card and “coming soon” placeholders for future games.',
+                'Core game loop: critters spawn around the screen, the prompt updates (“Tap the ___s!”), and taps animate, score, and remove critters.',
+                'Reactive state management with RxJS (GameState published via BehaviorSubject/Observable) so UI stays in sync with gameplay.',
+                'Audio + speech feedback: Web Audio sound effects and Speech Synthesis voice prompts, plus a simple sound on/off toggle.',
+                'Milestone celebration mode (temporary overlay + fanfare) and pacing rules (target rotation + cleanup to avoid overcrowding).'
+            ],
+            contribution:
+                'Solo development: I designed and built the app end-to-end—UI/UX, routing, standalone component structure, state management, game rules, animations, audio/speech behavior, and a simple build/deploy workflow suitable for static hosting.',
+            skills: [
+                'Technical: Angular 19 standalone components, Angular Router',
+                'Technical: TypeScript domain modeling (Critter, GameState, GameAnimal, GameColor)',
+                'Technical: RxJS state patterns (BehaviorSubject/Observable)',
+                'Technical: Web Audio API + Speech Synthesis API',
+                'Technical: Mobile/touch event handling, component-scoped CSS + animation',
+                'Durable: Product thinking for a young audience and tight feedback loops',
+                'Durable: Iterative debugging (browser/mobile quirks) and separation of concerns via service-driven logic',
+                'Durable: Maintainable structure for adding more games later'
+            ],
+            skillsEvidence:
+                'I modeled the domain explicitly with interfaces and used that model consistently across the service and components. I centralized game rules and state transitions in a GameService so components stay mostly presentational and event-driven. To handle real-world mobile constraints, I enabled audio only after user interaction and exposed a clear sound toggle to keep the experience predictable.',
+            takeaways:
+                'Building for mobile browsers reinforced that audio/speech reliability depends on user-gesture timing and retry strategies. A small, well-typed model plus a single source of truth for state made the app easy to extend. I also learned to keep docs/spec expectations aligned with implementation as features evolve.',
+            diagramsWireframes: '/Color-Critters-models-diagram.svg',
+            screenshotsGifs: '/Color-Critters-App.jpeg'
+        },
     ];
 }
