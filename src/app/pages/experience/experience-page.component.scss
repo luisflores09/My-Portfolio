@@ -34,7 +34,64 @@
 
 @media (max-width: 560px) {
 	.skillsRail {
+		grid-template-columns: 1fr;
 		gap: 8px;
+		min-width: 0;
+	}
+
+	/* Mobile: remove arrows entirely */
+	.skillsRail__nav {
+		display: none;
+	}
+
+	/* Mobile: remove the outer box-outline */
+	.skillsCarousel {
+		--slide-gap: 12px;
+		width: 100%;
+		min-width: 0;
+		border: none;
+		background: transparent;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	/* Mobile: scroll-snap + auto-scroll can feel "jumpy"; disable snap */
+	.skillsTrack {
+		max-width: 100%;
+		min-width: 0;
+		padding: 4px 8px;
+		scroll-snap-type: none;
+		scroll-padding-inline: 0;
+		cursor: auto;
+	}
+
+	.skillSlide {
+		width: min(86vw, 320px);
+		min-height: 190px;
+		scroll-snap-align: none;
+	}
+
+	.skillSlide--active {
+		transform: scale(1.02);
+	}
+
+	.skillSlide__icon {
+		width: 104px;
+		height: 104px;
+		border-radius: 26px;
+	}
+
+	.skillSlide__img {
+		width: 66px;
+		height: 66px;
+	}
+
+	.skillSlide__name {
+		font-size: 1.12rem;
+	}
+
+	.skillsProgress {
+		margin-top: 8px;
 	}
 }
 
@@ -119,17 +176,8 @@
 }
 
 @media (max-width: 520px) {
-	.skillsCarousel {
-		padding: 12px 10px;
-	}
-
-	.skillsTrack {
-		padding-inline: 6px;
-		scroll-padding-inline: 6px;
-	}
-
 	.skillSlide {
-		width: min(86vw, 320px);
+		width: min(90vw, 320px);
 	}
 }
 
