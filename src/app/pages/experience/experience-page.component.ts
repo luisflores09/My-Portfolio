@@ -114,6 +114,10 @@ export class ExperiencePageComponent implements AfterViewInit, OnDestroy {
     const track = this.skillsTrack?.nativeElement;
     if (!track) return;
 
+		// On real touch devices, prefer native horizontal scrolling.
+		// Our pointer-capture drag handling can prevent normal finger scrolling.
+		if (event.pointerType === 'touch') return;
+
     this.isPointerDown = true;
     this.pointerStartX = event.clientX;
     this.startScrollLeft = track.scrollLeft;
@@ -122,6 +126,7 @@ export class ExperiencePageComponent implements AfterViewInit, OnDestroy {
   }
 
   onSkillsPointerMove(event: PointerEvent): void {
+    if (event.pointerType === 'touch') return;
     if (!this.isPointerDown) return;
     const track = this.skillsTrack?.nativeElement;
     if (!track) return;
@@ -132,6 +137,7 @@ export class ExperiencePageComponent implements AfterViewInit, OnDestroy {
   }
 
   onSkillsPointerUp(event: PointerEvent): void {
+    if (event.pointerType === 'touch') return;
     const track = this.skillsTrack?.nativeElement;
     this.isPointerDown = false;
     this.lastTimestamp = null;
