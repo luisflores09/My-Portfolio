@@ -54,12 +54,12 @@ export class ExperiencePageComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly cdr: ChangeDetectorRef) {}
 
   experienceHighlights: string[] = [
-    'Build modern front ends (Angular/TypeScript, React) with responsive layout and clean component architecture.',
-    'Design and integrate REST APIs across stacks (.NET/Express/Flask), including DTO-driven contracts and error handling.',
-    'Implement authentication flows (OAuth, JWT, OpenID) and secure cross-origin/session behavior.',
-    'Model relational data with integrity in mind (EF Core + SQL Server, migrations, unique constraints).',
-    'Ship with reliability: tests, CI/CD, Docker packaging, and environment-based configuration.',
-    'Use AI tools to accelerate delivery (scaffolding, refactors, test creation) with human review and production standards.'
+    'Deliver responsive, accessible front ends (Angular/TypeScript, React) with maintainable component structure.',
+    'Design and integrate REST APIs across stacks (.NET/Express/Flask) with clear contracts, validation, and error handling.',
+    'Implement secure authentication and authorization (JWT/OAuth/OpenID) and follow safe client/server patterns.',
+    'Model relational data with integrity in mind (EF Core + SQL Server), including migrations and constraints.',
+    'Improve reliability through testing, CI/CD, Docker, and environment-based configuration.',
+    'Communicate trade-offs and ship iteratively—delivering smaller slices, gathering feedback, and polishing confidently.'
   ];
 
   skills: Skill[] = [
