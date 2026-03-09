@@ -7,52 +7,80 @@
 
   <section class="prose section" aria-label="Contact methods">
     <div class="contact-grid">
-      <div class="contact-item">
-        <a mat-icon-button color="primary" href="mailto:iluisflores@yahoo.com" aria-label="Email">
-          <mat-icon aria-hidden="true">mail</mat-icon>
-        </a>
-        <a class="inline-link contact-link" href="mailto:iluisflores@yahoo.com">iluisflores&#64;yahoo.com</a>
-      </div>
+      <a
+        class="contact-item"
+        href="mailto:iluisflores@yahoo.com"
+        aria-label="Email"
+        title="iluisflores@yahoo.com"
+      >
+        <div class="contact-icon" aria-hidden="true">
+          <mat-icon>mail</mat-icon>
+        </div>
+        <div class="contact-body">
+          <p class="contact-label">Email</p>
+          <span class="contact-link">iluisflores&#64;yahoo.com</span>
+        </div>
+      </a>
 
-      <div class="contact-item">
-        <a
-          mat-icon-button
-          color="primary"
-          href="https://www.linkedin.com/in/luis-flores-estrada/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <mat-icon aria-hidden="true">work</mat-icon>
-        </a>
-        <a
-          class="inline-link contact-link"
-          href="https://www.linkedin.com/in/luis-flores-estrada/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          LinkedIn
-        </a>
-      </div>
+      <a
+        class="contact-item"
+        href="https://www.linkedin.com/in/luis-flores-estrada/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+      >
+        <div class="contact-icon" aria-hidden="true">
+          <mat-icon>work</mat-icon>
+        </div>
+        <div class="contact-body">
+          <p class="contact-label">LinkedIn</p>
+          <span class="contact-link">View profile</span>
+        </div>
+      </a>
 
-      <div class="contact-item">
+      <a
+        class="contact-item"
+        href="https://github.com/luisflores09"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+      >
+        <div class="contact-icon" aria-hidden="true">
+          <mat-icon>code</mat-icon>
+        </div>
+        <div class="contact-body">
+          <p class="contact-label">GitHub</p>
+          <span class="contact-link">View repositories</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="prose section" aria-label="Resume">
+    <div class="resumeCard">
+      <h2>Résumé</h2>
+      <p class="resumeCard__lead">
+        Download a PDF copy of my résumé, or open it in a new tab.
+      </p>
+      <div class="resumeCard__actions">
         <a
-          mat-icon-button
+          mat-flat-button
           color="primary"
-          href="https://github.com/luisflores09"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
+          href="/Luis%20Flores%20Resume.pdf"
+          download
+          aria-label="Download resume PDF"
         >
-          <mat-icon aria-hidden="true">code</mat-icon>
+          <mat-icon aria-hidden="true">download</mat-icon>
+          Download PDF
         </a>
         <a
-          class="inline-link contact-link"
-          href="https://github.com/luisflores09"
+          mat-stroked-button
+          href="/Luis%20Flores%20Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="View resume PDF"
         >
-          GitHub
+          View
         </a>
       </div>
     </div>

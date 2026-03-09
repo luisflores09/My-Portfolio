@@ -1,48 +1,187 @@
 
 .contact-grid {
-  width: min(100%, 560px);
+  width: min(100%, 760px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 .contact-item {
+  min-width: 0;
   display: grid;
-  justify-items: center;
-  gap: 6px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: calc(var(--radius-lg) + 4px);
+  border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  box-shadow: 0 18px 46px color-mix(in srgb, var(--text-primary) 12%, transparent);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
+  will-change: transform;
+}
+
+.contact-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 54px color-mix(in srgb, var(--text-primary) 14%, transparent);
+  border-color: color-mix(in srgb, var(--card-border) 70%, var(--mat-sys-primary));
+}
+
+.contact-item:active {
+  transform: translateY(0);
+  box-shadow: 0 16px 42px color-mix(in srgb, var(--text-primary) 12%, transparent);
+}
+
+.contact-item:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--mat-sys-primary) 60%, transparent);
+  outline-offset: 3px;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card-bg) 82%, var(--mat-sys-primary) 18%);
+  border: 1px solid color-mix(in srgb, var(--card-border) 70%, transparent);
 }
 
 .contact-item mat-icon {
-  font-size: 22px;
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+}
+
+.contact-body {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.contact-label {
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  font-size: 1.05rem;
 }
 
 .contact-link {
-  text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.35;
+  max-width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 480px) {
   .contact-grid {
-    gap: 10px;
-  }
-
-  .contact-link {
-    font-size: 0.9rem;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
 
 .inline-link {
-  color: var(--mat-sys-primary);
+  color: color-mix(in srgb, var(--mat-sys-primary) 80%, var(--text-primary));
   text-decoration: none;
+  text-underline-offset: 3px;
 }
 
 .inline-link:hover {
   text-decoration: underline;
+}
+
+.inline-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--mat-sys-primary) 65%, transparent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.resumeCard {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  padding: 18px;
+  border-radius: calc(var(--radius-lg) + 4px);
+  border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+  box-shadow: 0 18px 46px color-mix(in srgb, var(--text-primary) 12%, transparent);
+}
+
+.resumeCard h2 {
+  margin-top: 0;
+}
+
+.resumeCard__lead {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.resumeCard__actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.resumeCard__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]) {
+  height: 34px;
+  padding-inline: 12px;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  transition:
+    transform 120ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
+  will-change: transform;
+}
+
+.resumeCard__actions :is(a[mat-stroked-button], button[mat-stroked-button]) {
+  border-color: color-mix(in srgb, var(--card-border) 70%, var(--mat-sys-primary));
+  background: color-mix(in srgb, var(--card-bg) 86%, var(--mat-sys-primary) 14%);
+}
+
+.resumeCard__actions :is(a[mat-flat-button][color='primary'], button[mat-flat-button][color='primary']) {
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--text-primary) 12%, transparent);
+}
+
+.resumeCard__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]):hover:not([disabled]) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--text-primary) 16%, transparent);
+}
+
+.resumeCard__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]):active:not([disabled]) {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--text-primary) 14%, transparent);
+}
+
+.resumeCard__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--mat-sys-primary) 60%, transparent);
+  outline-offset: 2px;
+}
+
+.resumeCard__actions :is(button[disabled], a[aria-disabled='true']) {
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
+.resumeCard__actions a[mat-flat-button] mat-icon {
+  margin-right: 8px;
 }
