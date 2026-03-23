@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'My Portfolio' title`, () => {
+  it(`should have the 'Luis\' Portfolio' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('My Portfolio');
+    expect(app.title).toEqual("Luis' Portfolio");
   });
 
   it('should render the toolbar title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.brand')?.textContent).toContain('My Portfolio');
+    expect(compiled.querySelector('.brand')?.textContent).toContain("Luis' Portfolio");
   });
 });

@@ -32,6 +32,14 @@ type Project = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectsPageComponent {
+    openExternalUrl(url?: string): void {
+        if (!url) return;
+        if (typeof window === 'undefined') return;
+
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+        if (newWindow) newWindow.opener = null;
+    }
+
     projects: Project[] = [
         {
             id: 'inventory-application',
@@ -251,6 +259,41 @@ export class ProjectsPageComponent {
                 'Building for mobile browsers reinforced that audio/speech reliability depends on user-gesture timing and retry strategies. A small, well-typed model plus a single source of truth for state made the app easy to extend. I also learned to keep docs/spec expectations aligned with implementation as features evolve.',
             diagramsWireframes: '/Color-Critters-models-diagram.svg',
             screenshotsGifs: '/Color-Critters-App.jpeg'
+        },
+        {
+            id: 'text-analysis-app',
+            name: 'Text-Analysis-App',
+            repoUrl: undefined,
+            deployedUrl: "http://text-analysis-app.s3-website.us-east-2.amazonaws.com/",
+            recordingUrl: undefined,
+            includeContribution: true,
+            purposeGoals:
+                'I built Text-Analysis-App to provide a simple, browser-based “text analysis” tool that calls AWS Comprehend through a serverless API so I can quickly extract sentiment, key phrases, and entities from arbitrary text. I wanted a clean UI that validates input, shows progress clearly, and presents results in an easy-to-scan format.',
+            features: [
+                'Single-page Angular UI with a textarea input plus “Analyze / Sample / Clear” actions and clear loading + error states.',
+                'Results displayed in three sections: sentiment (label + score bars), key phrases (chips), and entities (typed list with confidence).',
+                'Typed API client service that POSTs `{ text }` to an API Gateway/Lambda endpoint and normalizes error handling.',
+                'Deployment documentation for static hosting to S3, including required CORS considerations for browser → API Gateway calls.'
+            ],
+            contribution:
+                'Solo development: I built the app end-to-end—UI/UX, Angular architecture, API integration, TypeScript modeling, error handling, and deployment documentation. I designed the backend contract around API Gateway (HTTP API) → Lambda → AWS Comprehend and wired the frontend to the `/analyze` endpoint.',
+            skills: [
+                'Technical: Angular 19 (standalone components) + Angular Material UI',
+                'Technical: Reactive forms + validation, derived UI state via signals/computed selectors',
+                'Technical: RxJS + HttpClient, RESTful API integration',
+                'Technical: TypeScript modeling at API boundaries (typed request/response)',
+                'Technical: AWS Lambda + API Gateway (HTTP API) integration patterns',
+                'Technical: AWS Comprehend (sentiment, key phrases, entities)',
+                'Technical: Static site hosting on S3, browser networking + CORS constraints',
+                'Durable: End-to-end ownership and product thinking (fast feedback UX)',
+                'Durable: Debugging (CORS and cross-origin integration), clear documentation'
+            ],
+            skillsEvidence:
+                'I kept the codebase small and maintainable by using Angular standalone patterns and a focused route/component structure. I modeled the API payloads as explicit TypeScript interfaces and derived the UI from those models, which made rendering the three result sections straightforward. I handled real-world edge cases (required input, length limits, loading/progress, and readable error messages extracted from API responses) and treated deployment as part of the deliverable by writing S3 static-hosting steps and calling out CORS requirements for calling API Gateway from a browser-based SPA.',
+            takeaways:
+                'I learned that “serverless + browser” integration lives or dies on correct CORS behavior and consistent headers across OPTIONS + normal responses. Strong typing at the boundary (clear request/response models) reduced UI guesswork and made the rendering logic simpler. Pairing a polished UI with realistic deployment notes helped me ship a complete, demo-ready app.',
+            diagramsWireframes: undefined,
+            screenshotsGifs: undefined
         },
     ];
 }

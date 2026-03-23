@@ -28,7 +28,7 @@ type NavLink = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'My Portfolio';
+  title = "Luis' Portfolio";
 
   navLinks: NavLink[] = [
     { label: 'Home', path: '/', exact: true },

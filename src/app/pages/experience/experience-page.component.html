@@ -10,68 +10,13 @@
 
   <section class="section">
     <h2>Skills</h2>
-		<div class="skillsRail">
-			<button
-				mat-icon-button
-				type="button"
-				class="skillsRail__nav"
-				(click)="scrollSkills(-1)"
-				aria-label="Scroll skills left"
-			>
-				<mat-icon aria-hidden="true">chevron_left</mat-icon>
-			</button>
-
-			<div
-				class="skillsCarousel"
-				role="region"
-				aria-label="Skills carousel"
-				(mouseenter)="pauseAutoScroll(true)"
-				(mouseleave)="pauseAutoScroll(false)"
-			>
-				<div
-					#skillsTrack
-					class="skillsTrack"
-					role="list"
-					aria-label="Skills"
-					(scroll)="onSkillsScroll()"
-					(pointerdown)="onSkillsPointerDown($event)"
-					(pointermove)="onSkillsPointerMove($event)"
-					(pointerup)="onSkillsPointerUp($event)"
-					(pointercancel)="onSkillsPointerUp($event)"
-					(lostpointercapture)="onSkillsPointerUp($event)"
-				>
-					@for (skill of skillsLoop; track skill.name + '-' + $index) {
-						<mat-card
-							#skillSlide
-							class="skillSlide"
-							role="listitem"
-							[class.skillSlide--active]="$index === activeSkillIndex"
-						>
-							<div class="skillSlide__icon" aria-hidden="true">
-								<img class="skillSlide__img" [src]="skill.icon" alt="" loading="lazy" decoding="async" />
-							</div>
-							<div class="skillSlide__name">{{ skill.name }}</div>
-						</mat-card>
-					}
-				</div>
-
-				<mat-progress-bar
-					class="skillsProgress"
-					mode="determinate"
-					[value]="skillsProgress"
-					aria-label="Skills scroll progress"
-				></mat-progress-bar>
-			</div>
-
-			<button
-				mat-icon-button
-				type="button"
-				class="skillsRail__nav"
-				(click)="scrollSkills(1)"
-				aria-label="Scroll skills right"
-			>
-				<mat-icon aria-hidden="true">chevron_right</mat-icon>
-			</button>
+		<div class="skillsGrid" role="list" aria-label="Skills">
+			@for (skill of skills; track skill.name) {
+				<mat-card class="skillChip" role="listitem">
+					<img class="skillChip__img" [src]="skill.icon" alt="" loading="lazy" decoding="async" />
+					<div class="skillChip__name">{{ skill.name }}</div>
+				</mat-card>
+			}
 		</div>
   </section>
 

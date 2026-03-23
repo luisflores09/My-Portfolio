@@ -13,23 +13,30 @@
             <h2 class="project__name">{{ project.name }}</h2>
 
             <div class="project__actions" aria-label="Project links">
-              @if (project.repoUrl) {
-                <a mat-stroked-button [href]="project.repoUrl" target="_blank" rel="noopener noreferrer">Repo</a>
-              } @else {
-                <button mat-stroked-button disabled>Repo</button>
-              }
+              <button
+                mat-stroked-button
+                [disabled]="!project.repoUrl"
+                (click)="openExternalUrl(project.repoUrl)"
+              >
+                Repo
+              </button>
 
-              @if (project.deployedUrl) {
-                <a mat-flat-button color="primary" [href]="project.deployedUrl" target="_blank" rel="noopener noreferrer">Deployed</a>
-              } @else {
-                <button mat-flat-button color="primary" disabled>Deployed</button>
-              }
+              <button
+                mat-flat-button
+                color="primary"
+                [disabled]="!project.deployedUrl"
+                (click)="openExternalUrl(project.deployedUrl)"
+              >
+                Deployed
+              </button>
 
-              @if (project.recordingUrl) {
-                <a mat-stroked-button [href]="project.recordingUrl" target="_blank" rel="noopener noreferrer">Recording</a>
-              } @else {
-                <button mat-stroked-button disabled>Recording</button>
-              }
+              <button
+                mat-stroked-button
+                [disabled]="!project.recordingUrl"
+                (click)="openExternalUrl(project.recordingUrl)"
+              >
+                Recording
+              </button>
             </div>
           </header>
 
@@ -60,18 +67,18 @@
               }
             </mat-expansion-panel>
 
-            @if (project.includeContribution) {
-              <mat-expansion-panel class="project__panel">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>Your specific contribution</mat-panel-title>
-                </mat-expansion-panel-header>
-                @if (project.contribution) {
-                  <p class="project__body">{{ project.contribution }}</p>
-                } @else {
-                  <p class="project__placeholder">TBD</p>
-                }
-              </mat-expansion-panel>
-            }
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>My Specific Contribution</mat-panel-title>
+              </mat-expansion-panel-header>
+              @if (!project.includeContribution) {
+                <p class="project__placeholder">Not applicable</p>
+              } @else if (project.contribution) {
+                <p class="project__body">{{ project.contribution }}</p>
+              } @else {
+                <p class="project__placeholder">TBD</p>
+              }
+            </mat-expansion-panel>
 
             <mat-expansion-panel class="project__panel">
               <mat-expansion-panel-header>
@@ -110,12 +117,12 @@
               }
             </mat-expansion-panel>
 
-            @if (project.diagramsWireframes || project.screenshotsGifs) {
-              <mat-expansion-panel class="project__panel">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>Media</mat-panel-title>
-                </mat-expansion-panel-header>
+            <mat-expansion-panel class="project__panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Media</mat-panel-title>
+              </mat-expansion-panel-header>
 
+              @if (project.diagramsWireframes || project.screenshotsGifs) {
                 <div class="project__mediaGrid">
                   @if (project.diagramsWireframes) {
                     <a
@@ -151,8 +158,10 @@
                     </a>
                   }
                 </div>
-              </mat-expansion-panel>
-            }
+              } @else {
+                <p class="project__placeholder">No media</p>
+              }
+            </mat-expansion-panel>
           </mat-accordion>
         </mat-card-content>
       </mat-card>

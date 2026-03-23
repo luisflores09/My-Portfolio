@@ -1,7 +1,6 @@
 
 .contact-grid {
-  width: min(100%, 760px);
-  margin-inline: auto;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
@@ -111,8 +110,7 @@
 }
 
 .resumeCard {
-  width: min(100%, 760px);
-  margin-inline: auto;
+  width: 100%;
   padding: 18px;
   border-radius: calc(var(--radius-lg) + 4px);
   border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);

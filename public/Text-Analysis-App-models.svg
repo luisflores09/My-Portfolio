@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-label="Text Analysis API models diagram">
+  <defs>
+    <style><![CDATA[
+      .bg { fill: #ffffff; }
+      .title { font: 700 24px/1.2 Roboto, Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px/1.3 Roboto, Arial, sans-serif; fill: #374151; }
+      .box { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1.2; }
+      .boxHeader { fill: #eef2ff; stroke: #d1d5db; stroke-width: 1.2; }
+      .boxTitle { font: 700 14px/1.2 Roboto, Arial, sans-serif; fill: #111827; }
+      .field { font: 400 13px/1.35 Roboto, Arial, sans-serif; fill: #111827; }
+      .muted { fill: #6b7280; }
+      .link { stroke: #6b7280; stroke-width: 1.2; fill: none; }
+    ]]></style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="820" />
+
+  <text class="title" x="32" y="48">Text Analysis Models</text>
+  <text class="subtitle" x="32" y="72">Frontend TypeScript request/response contract used by the Angular app</text>
+
+  <!-- AnalyzeTextRequest -->
+  <g transform="translate(32, 110)">
+    <rect class="boxHeader" x="0" y="0" width="360" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="360" height="70" rx="10" />
+    <text class="boxTitle" x="14" y="22">AnalyzeTextRequest</text>
+    <text class="field" x="14" y="58"><tspan class="muted">text</tspan>: string</text>
+  </g>
+
+  <!-- AnalyzeTextResponse -->
+  <g transform="translate(440, 110)">
+    <rect class="boxHeader" x="0" y="0" width="380" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="380" height="110" rx="10" />
+    <text class="boxTitle" x="14" y="22">AnalyzeTextResponse</text>
+    <text class="field" x="14" y="58"><tspan class="muted">sentiment</tspan>?: DetectSentimentResult</text>
+    <text class="field" x="14" y="80"><tspan class="muted">keyPhrases</tspan>?: DetectKeyPhrasesResult</text>
+    <text class="field" x="14" y="102"><tspan class="muted">entities</tspan>?: DetectEntitiesResult</text>
+  </g>
+
+  <!-- DetectSentimentResult -->
+  <g transform="translate(440, 270)">
+    <rect class="boxHeader" x="0" y="0" width="380" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="380" height="98" rx="10" />
+    <text class="boxTitle" x="14" y="22">DetectSentimentResult</text>
+    <text class="field" x="14" y="58"><tspan class="muted">Sentiment</tspan>?: ComprehendSentimentLabel</text>
+    <text class="field" x="14" y="80"><tspan class="muted">SentimentScore</tspan>?: SentimentScore</text>
+  </g>
+
+  <!-- SentimentScore -->
+  <g transform="translate(860, 270)">
+    <rect class="boxHeader" x="0" y="0" width="308" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="308" height="120" rx="10" />
+    <text class="boxTitle" x="14" y="22">SentimentScore</text>
+    <text class="field" x="14" y="58"><tspan class="muted">Positive</tspan>?: number</text>
+    <text class="field" x="14" y="80"><tspan class="muted">Negative</tspan>?: number</text>
+    <text class="field" x="14" y="102"><tspan class="muted">Neutral</tspan>?: number</text>
+    <text class="field" x="14" y="124"><tspan class="muted">Mixed</tspan>?: number</text>
+  </g>
+
+  <!-- DetectKeyPhrasesResult -->
+  <g transform="translate(32, 450)">
+    <rect class="boxHeader" x="0" y="0" width="360" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="360" height="72" rx="10" />
+    <text class="boxTitle" x="14" y="22">DetectKeyPhrasesResult</text>
+    <text class="field" x="14" y="58"><tspan class="muted">KeyPhrases</tspan>?: KeyPhrase[]</text>
+  </g>
+
+  <!-- KeyPhrase -->
+  <g transform="translate(440, 450)">
+    <rect class="boxHeader" x="0" y="0" width="380" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="380" height="140" rx="10" />
+    <text class="boxTitle" x="14" y="22">KeyPhrase</text>
+    <text class="field" x="14" y="58"><tspan class="muted">Text</tspan>?: string</text>
+    <text class="field" x="14" y="80"><tspan class="muted">Score</tspan>?: number</text>
+    <text class="field" x="14" y="102"><tspan class="muted">BeginOffset</tspan>?: number</text>
+    <text class="field" x="14" y="124"><tspan class="muted">EndOffset</tspan>?: number</text>
+  </g>
+
+  <!-- DetectEntitiesResult -->
+  <g transform="translate(32, 610)">
+    <rect class="boxHeader" x="0" y="0" width="360" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="360" height="72" rx="10" />
+    <text class="boxTitle" x="14" y="22">DetectEntitiesResult</text>
+    <text class="field" x="14" y="58"><tspan class="muted">Entities</tspan>?: Entity[]</text>
+  </g>
+
+  <!-- Entity -->
+  <g transform="translate(440, 610)">
+    <rect class="boxHeader" x="0" y="0" width="380" height="34" rx="10" />
+    <rect class="box" x="0" y="34" width="380" height="162" rx="10" />
+    <text class="boxTitle" x="14" y="22">Entity</text>
+    <text class="field" x="14" y="58"><tspan class="muted">Text</tspan>?: string</text>
+    <text class="field" x="14" y="80"><tspan class="muted">Type</tspan>?: string</text>
+    <text class="field" x="14" y="102"><tspan class="muted">Score</tspan>?: number</text>
+    <text class="field" x="14" y="124"><tspan class="muted">BeginOffset</tspan>?: number</text>
+    <text class="field" x="14" y="146"><tspan class="muted">EndOffset</tspan>?: number</text>
+  </g>
+
+  <!-- Relationships -->
+  <!-- Request -> Response (conceptual API call) -->
+  <path class="link" marker-end="url(#arrow)" d="M 392 150 C 420 150, 420 150, 440 150" />
+  <text class="subtitle" x="402" y="140">POST /analyze</text>
+
+  <!-- AnalyzeTextResponse -> DetectSentimentResult -->
+  <path class="link" marker-end="url(#arrow)" d="M 630 254 C 630 262, 630 262, 630 270" />
+
+  <!-- DetectSentimentResult -> SentimentScore -->
+  <path class="link" marker-end="url(#arrow)" d="M 820 320 C 840 320, 840 320, 860 320" />
+
+  <!-- AnalyzeTextResponse -> DetectKeyPhrasesResult -->
+  <path class="link" marker-end="url(#arrow)" d="M 520 220 C 420 300, 300 360, 212 450" />
+
+  <!-- DetectKeyPhrasesResult -> KeyPhrase -->
+  <path class="link" marker-end="url(#arrow)" d="M 392 486 C 415 486, 415 486, 440 486" />
+
+  <!-- AnalyzeTextResponse -> DetectEntitiesResult -->
+  <path class="link" marker-end="url(#arrow)" d="M 650 220 C 540 360, 360 520, 212 610" />
+
+  <!-- DetectEntitiesResult -> Entity -->
+  <path class="link" marker-end="url(#arrow)" d="M 392 646 C 415 646, 415 646, 440 646" />
+
+  <!-- Note -->
+  <text class="subtitle" x="32" y="800">Note: These models mirror the subset of fields the UI reads from AWS Comprehend responses.</text>
+</svg>
