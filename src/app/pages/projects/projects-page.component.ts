@@ -82,7 +82,7 @@ export class ProjectsPageComponent {
             takeaways:
                 "I learned that aligning the API shape with UI requirements early (IDs, routes, payload structure) prevents rework and speeds up development. I saw firsthand that responsive design and UI polish take iteration, but they produce a noticeable improvement in the user experience. I reinforced that clean commits, consistent formatting, and basic test coverage make teamwork smoother and reduce regressions.",
             diagramsWireframes: "/Inventory-App-Wireframe.png",
-            screenshotsGifs: "/Inventory-App.jpeg"
+            screenshotsGifs: "/Inventory-App.jpeg?v=2"
         },
         {
             id: 'final-bootcamp-project',
