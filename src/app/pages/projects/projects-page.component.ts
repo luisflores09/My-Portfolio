@@ -32,6 +32,12 @@ type Project = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectsPageComponent {
+    formatSkillLabel(skill: string): string {
+        const trimmed = skill.trim();
+        const match = trimmed.match(/^[^:]{1,40}:\s*(.+)$/);
+        return match ? match[1] : trimmed;
+    }
+
     openExternalUrl(url?: string): void {
         if (!url) return;
         if (typeof window === 'undefined') return;

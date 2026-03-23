@@ -87,7 +87,7 @@
               @if (project.skills?.length) {
                 <ul class="project__list">
                   @for (skill of project.skills; track skill) {
-                    <li>{{ skill }}</li>
+                    <li>{{ formatSkillLabel(skill) }}</li>
                   }
                 </ul>
               } @else {
