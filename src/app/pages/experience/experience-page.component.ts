@@ -16,12 +16,13 @@ type Skill = {
 })
 export class ExperiencePageComponent {
   experienceHighlights: string[] = [
-    'Deliver responsive, accessible front ends (Angular/TypeScript, React) with maintainable component structure.',
-    'Design and integrate REST APIs across stacks (.NET/Express/Flask) with clear contracts, validation, and error handling.',
-    'Implement secure authentication and authorization (JWT/OAuth/OpenID) and follow safe client/server patterns.',
-    'Model relational data with integrity in mind (EF Core + SQL Server), including migrations and constraints.',
-    'Improve reliability through testing, CI/CD, Docker, and environment-based configuration.',
-    'Communicate trade-offs and ship iteratively—delivering smaller slices, gathering feedback, and polishing confidently.'
+    'Delivered responsive, accessible front ends (Angular/TypeScript, React) with maintainable component structure.',
+    'Designed and integrated REST APIs across stacks (.NET/Express/Flask) with clear contracts, validation, and error handling.',
+    'Implemented secure authentication and authorization (JWT/OAuth/OpenID) and followed safe client/server patterns.',
+    'Participated in a cybersecurity tournament, learning common API vulnerabilities and applying OWASP Top 10 concepts (auth, access control, input validation).',
+    'Modeled relational data with integrity in mind (EF Core + SQL Server), including migrations and constraints.',
+    'Improved reliability through testing, CI/CD, Docker, and environment-based configuration.',
+    'Communicated trade-offs and shipped iteratively—delivering smaller slices, gathering feedback, and polishing confidently.'
   ];
 
   skills: Skill[] = [
