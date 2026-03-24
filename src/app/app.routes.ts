@@ -11,27 +11,27 @@ export const routes: Routes = [
 		path: '',
 		pathMatch: 'full',
 		component: HomePageComponent,
-		title: 'Home'
+			title: "Luis' Portfolio"
 	},
 	{
 		path: 'about',
 		component: AboutPageComponent,
-		title: 'About'
+			title: "Luis' About"
 	},
 	{
 		path: 'experience',
 		component: ExperiencePageComponent,
-		title: 'Experience & Skills'
+			title: "Luis' Experience & Skills"
 	},
 	{
 		path: 'projects',
 		component: ProjectsPageComponent,
-		title: 'Projects'
+			title: "Luis's Projects"
 	},
 	{
 		path: 'contact',
 		component: ContactPageComponent,
-		title: 'Contact'
+			title: "Luis' Contact"
 	},
 	{
 		path: '**',
