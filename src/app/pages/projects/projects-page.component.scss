@@ -1,57 +1,218 @@
-.projects-list {
+// ── Compact tile grid ────────────────────────────────────────────────────────
+.projects-grid {
   width: 100%;
-  margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 14px;
+  counter-reset: tile-counter;
 }
 
-@media (max-width: 420px) {
-  .projects-list {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-}
+// Per-tile accent color cycling
+.proj-tile:nth-child(4n+1) { --tile-accent: var(--text-secondary); }
+.proj-tile:nth-child(4n+2) { --tile-accent: var(--text-accent); }
+.proj-tile:nth-child(4n+3) { --tile-accent: var(--text-orange); }
+.proj-tile:nth-child(4n+0) { --tile-accent: var(--text-violet); }
 
-.project-card {
-  text-align: left;
-  border-radius: calc(var(--radius-lg) + 4px);
-  overflow: hidden;
-  background: color-mix(in srgb, var(--card-bg) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);
-}
-
-@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-  .project-card {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-  }
-}
-
-.project-card__content {
-  padding: 16px;
-}
-
-.project__header {
+.proj-tile {
+  --tile-accent: var(--text-secondary); // fallback
+  counter-increment: tile-counter;
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+  padding: 28px 28px 22px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--tile-accent) 5%, var(--card-bg));
+  border: 1px solid color-mix(in srgb, var(--tile-accent) 30%, var(--card-border));
+  box-shadow: inset 4px 0 0 var(--tile-accent);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  will-change: transform;
 }
 
-.project__name {
+.proj-tile::before {
+  content: counter(tile-counter, decimal-leading-zero);
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--tile-accent) 55%, transparent);
+  line-height: 1;
+}
+
+.proj-tile:hover {
+  transform: translateY(-3px);
+  background: color-mix(in srgb, var(--tile-accent) 9%, var(--card-bg));
+  box-shadow:
+    inset 4px 0 0 var(--tile-accent),
+    0 16px 36px color-mix(in srgb, var(--tile-accent) 22%, transparent);
+}
+
+.proj-tile:focus-visible {
+  outline: 2px solid var(--tile-accent);
+  outline-offset: 2px;
+}
+
+.proj-tile__name {
   margin: 0;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  font-size: 1.25rem;
-  line-height: 1.25;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--tile-accent);
+  padding-right: 36px;
 }
 
+.proj-tile__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+.proj-tile__hint {
+  margin-top: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tile-accent) 75%, transparent);
+}
+
+// ── Modal overlay ────────────────────────────────────────────────────────────
+.proj-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.proj-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  animation: backdrop-in 200ms ease forwards;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.proj-overlay__sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 52px 28px 40px;
+  // Inset the scrollbar so it never overlaps the card border
+  padding-right: 12px;
+  scrollbar-gutter: stable;
+  border-radius: 24px;
+
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color:
+    color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 45%, transparent)
+    transparent;
+
+  // WebKit / Chromium
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 20px; // keeps it away from the rounded corners
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 45%, transparent);
+    transition: background 150ms;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 70%, transparent);
+  }
+  background: var(--card-bg);
+  border: 1px solid color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 30%, var(--card-border));
+  box-shadow:
+    inset 0 4px 0 var(--modal-accent, var(--text-secondary)),
+    0 24px 80px color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 18%, transparent),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+  animation: sheet-up 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes sheet-up {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.proj-overlay__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 40%, var(--card-border));
+  background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 10%, var(--card-bg));
+  color: var(--modal-accent, var(--text-secondary));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 140ms, transform 140ms;
+  font-family: inherit;
+  z-index: 2;
+}
+
+.proj-overlay__close:hover {
+  background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 22%, var(--card-bg));
+  transform: scale(1.1);
+}
+
+.proj-overlay__head {
+  margin-bottom: 24px;
+}
+
+.proj-overlay__name {
+  margin: 0 0 8px;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  line-height: 1.2;
+  color: var(--modal-accent, var(--text-secondary));
+  padding-right: 44px;
+}
+
+.proj-overlay__desc {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+// ── Action buttons ────────────────────────────────────────────────────────────
 .project__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: flex-end;
 }
 
 .project__actions :is(a[mat-stroked-button], a[mat-flat-button], button[mat-stroked-button], button[mat-flat-button]) {
@@ -97,12 +258,38 @@
   box-shadow: none;
 }
 
-@media (max-width: 900px) {
-  .project__actions {
-    justify-content: flex-start;
-  }
+// ── Expand / collapse all bar ─────────────────────────────────────────────
+.proj-accordion-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 8px;
 }
 
+.proj-accordion-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 35%, var(--card-border));
+  background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 8%, var(--card-bg));
+  color: var(--modal-accent, var(--text-secondary));
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 140ms, transform 140ms;
+}
+
+.proj-accordion-toggle:hover {
+  background: color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 16%, var(--card-bg));
+  transform: translateY(-1px);
+}
+
+// ── Accordion (inside modal sheet) ────────────────────────────────────────────
 .project__accordion {
   margin-top: 12px;
   display: grid;
@@ -112,7 +299,7 @@
 .project__panel {
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--modal-accent, var(--text-secondary)) 25%, var(--card-border));
   background: transparent;
   box-shadow: none;
 }
@@ -178,4 +365,17 @@
 
 .project__media--cover {
   object-fit: cover;
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .proj-overlay__sheet {
+    padding: 52px 16px 32px;
+    border-radius: 20px 20px 0 0;
+  }
 }

@@ -5,166 +5,202 @@
     <p class="lead">Write-ups for my key projects.</p>
   </section>
 
-  <section class="projects-list" aria-label="Project list">
+  <section class="projects-grid" aria-label="Project list">
     @for (project of projects; track project.id) {
-      <mat-card class="project-card">
-        <mat-card-content class="project-card__content">
-          <header class="project__header">
-            <h2 class="project__name">{{ project.name }}</h2>
-
-            <div class="project__actions" aria-label="Project links">
-              <button
-                mat-stroked-button
-                [disabled]="!project.repoUrl"
-                (click)="openExternalUrl(project.repoUrl)"
-              >
-                Repo
-              </button>
-
-              <button
-                mat-flat-button
-                color="primary"
-                [disabled]="!project.deployedUrl"
-                (click)="openExternalUrl(project.deployedUrl)"
-              >
-                Deployed
-              </button>
-
-              <button
-                mat-stroked-button
-                [disabled]="!project.recordingUrl"
-                (click)="openExternalUrl(project.recordingUrl)"
-              >
-                Recording
-              </button>
-            </div>
-          </header>
-
-          <mat-accordion class="project__accordion" multi>
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>Purpose / goals</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (project.purposeGoals) {
-                <p class="project__body">{{ project.purposeGoals }}</p>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>Overview of features</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (project.features?.length) {
-                <ul class="project__list">
-                  @for (item of project.features; track item) {
-                    <li>{{ item }}</li>
-                  }
-                </ul>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>My Specific Contribution</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (!project.includeContribution) {
-                <p class="project__placeholder">Not applicable</p>
-              } @else if (project.contribution) {
-                <p class="project__body">{{ project.contribution }}</p>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>Skills demonstrated</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (project.skills?.length) {
-                <ul class="project__list">
-                  @for (skill of project.skills; track skill) {
-                    <li>{{ formatSkillLabel(skill) }}</li>
-                  }
-                </ul>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>How it demonstrates those skills</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (project.skillsEvidence) {
-                <p class="project__body">{{ project.skillsEvidence }}</p>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>Takeaways</mat-panel-title>
-              </mat-expansion-panel-header>
-              @if (project.takeaways) {
-                <p class="project__body">{{ project.takeaways }}</p>
-              } @else {
-                <p class="project__placeholder">TBD</p>
-              }
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="project__panel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>Media</mat-panel-title>
-              </mat-expansion-panel-header>
-
-              @if (project.diagramsWireframes || project.screenshotsGifs) {
-                <div class="project__mediaGrid">
-                  @if (project.diagramsWireframes) {
-                    <a
-                      class="project__mediaLink"
-                      [href]="project.diagramsWireframes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        class="project__media project__media--contain"
-                        [src]="project.diagramsWireframes"
-                        [alt]="project.name + ' diagram'"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                  }
-
-                  @if (project.screenshotsGifs) {
-                    <a
-                      class="project__mediaLink"
-                      [href]="project.screenshotsGifs"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        class="project__media project__media--cover"
-                        [src]="project.screenshotsGifs"
-                        [alt]="project.name + ' screenshot'"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                  }
-                </div>
-              } @else {
-                <p class="project__placeholder">No media</p>
-              }
-            </mat-expansion-panel>
-          </mat-accordion>
-        </mat-card-content>
-      </mat-card>
+      <button
+        class="proj-tile"
+        type="button"
+        (click)="openProject(project, $index)"
+        [attr.aria-label]="'Open details for ' + project.name"
+      >
+        <span class="proj-tile__name">{{ project.name }}</span>
+        <p class="proj-tile__desc">{{ project.description }}</p>
+        <span class="proj-tile__hint" aria-hidden="true">View details →</span>
+      </button>
     }
   </section>
+
+  @if (selectedProject()) {
+    <div
+      class="proj-overlay"
+      role="dialog"
+      [attr.aria-label]="selectedProject()!.name + ' details'"
+      aria-modal="true"
+      [style.--modal-accent]="selectedAccent()"
+    >
+      <div class="proj-overlay__backdrop" (click)="closeProject()"></div>
+      <div class="proj-overlay__sheet">
+        <button
+          class="proj-overlay__close"
+          type="button"
+          (click)="closeProject()"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <div class="proj-overlay__head">
+          <h2 class="proj-overlay__name">{{ selectedProject()!.name }}</h2>
+          <p class="proj-overlay__desc">{{ selectedProject()!.description }}</p>
+          <div class="project__actions" aria-label="Project links">
+            <button
+              mat-stroked-button
+              [disabled]="!selectedProject()!.repoUrl"
+              (click)="openExternalUrl(selectedProject()!.repoUrl)"
+            >
+              Repo
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              [disabled]="!selectedProject()!.deployedUrl"
+              (click)="openExternalUrl(selectedProject()!.deployedUrl)"
+            >
+              Deployed
+            </button>
+            <button
+              mat-stroked-button
+              [disabled]="!selectedProject()!.recordingUrl"
+              (click)="openExternalUrl(selectedProject()!.recordingUrl)"
+            >
+              Recording
+            </button>
+          </div>
+        </div>
+
+        <div class="proj-accordion-bar">
+          <button
+            class="proj-accordion-toggle"
+            type="button"
+            (click)="allExpanded() ? accordion.closeAll() : accordion.openAll(); toggleAll()"
+          >
+            <mat-icon>{{ allExpanded() ? 'unfold_less' : 'unfold_more' }}</mat-icon>
+            {{ allExpanded() ? 'Collapse all' : 'Expand all' }}
+          </button>
+        </div>
+
+        <mat-accordion #accordion="matAccordion" class="project__accordion" multi>
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Purpose / goals</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.purposeGoals) {
+              <p class="project__body">{{ selectedProject()!.purposeGoals }}</p>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Overview of features</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.features?.length) {
+              <ul class="project__list">
+                @for (item of selectedProject()!.features!; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>My Specific Contribution</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (!selectedProject()!.includeContribution) {
+              <p class="project__placeholder">Not applicable</p>
+            } @else if (selectedProject()!.contribution) {
+              <p class="project__body">{{ selectedProject()!.contribution }}</p>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Skills demonstrated</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.skills?.length) {
+              <ul class="project__list">
+                @for (skill of selectedProject()!.skills!; track skill) {
+                  <li>{{ formatSkillLabel(skill) }}</li>
+                }
+              </ul>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>How it demonstrates those skills</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.skillsEvidence) {
+              <p class="project__body">{{ selectedProject()!.skillsEvidence }}</p>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Takeaways</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.takeaways) {
+              <p class="project__body">{{ selectedProject()!.takeaways }}</p>
+            } @else {
+              <p class="project__placeholder">TBD</p>
+            }
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="project__panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Media</mat-panel-title>
+            </mat-expansion-panel-header>
+            @if (selectedProject()!.diagramsWireframes || selectedProject()!.screenshotsGifs) {
+              <div class="project__mediaGrid">
+                @if (selectedProject()!.diagramsWireframes) {
+                  <a
+                    class="project__mediaLink"
+                    [href]="selectedProject()!.diagramsWireframes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      class="project__media project__media--contain"
+                      [src]="selectedProject()!.diagramsWireframes"
+                      [alt]="selectedProject()!.name + ' diagram'"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                }
+                @if (selectedProject()!.screenshotsGifs) {
+                  <a
+                    class="project__mediaLink"
+                    [href]="selectedProject()!.screenshotsGifs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      class="project__media project__media--cover"
+                      [src]="selectedProject()!.screenshotsGifs"
+                      [alt]="selectedProject()!.name + ' screenshot'"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                }
+              </div>
+            } @else {
+              <p class="project__placeholder">No media yet</p>
+            }
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  }
 </main>

@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 type Project = {
     id: string;
     name: string;
+    description: string;
     repoUrl?: string;
     deployedUrl?: string;
     recordingUrl?: string;
@@ -26,12 +28,45 @@ type Project = {
 
 @Component({
     selector: 'app-projects-page',
-    imports: [MatCardModule, MatButtonModule, MatExpansionModule],
+    imports: [MatCardModule, MatButtonModule, MatExpansionModule, MatIconModule],
     templateUrl: './projects-page.component.html',
     styleUrl: './projects-page.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectsPageComponent {
+    private readonly ACCENTS = [
+        'var(--text-secondary)',
+        'var(--text-accent)',
+        'var(--text-orange)',
+        'var(--text-violet)'
+    ];
+
+    selectedProject = signal<Project | null>(null);
+    selectedAccent  = signal('var(--text-secondary)');
+    allExpanded     = signal(false);
+
+    @HostListener('document:keydown.escape')
+    onEsc(): void {
+        if (this.selectedProject()) this.closeProject();
+    }
+
+    openProject(project: Project, index: number): void {
+        this.selectedProject.set(project);
+        this.selectedAccent.set(this.ACCENTS[index % 4]);
+        this.allExpanded.set(false);
+        if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
+    }
+
+    closeProject(): void {
+        this.selectedProject.set(null);
+        this.allExpanded.set(false);
+        if (typeof document !== 'undefined') document.body.style.overflow = '';
+    }
+
+    toggleAll(): void {
+        this.allExpanded.update(v => !v);
+    }
+
     formatSkillLabel(skill: string): string {
         const trimmed = skill.trim();
         const match = trimmed.match(/^[^:]{1,40}:\s*(.+)$/);
@@ -50,6 +85,7 @@ export class ProjectsPageComponent {
         {
             id: 'inventory-application',
             name: 'Inventory Application (Full-Stack Project)',
+            description: 'A team-built full-stack React + Express CRUD app for tracking and managing e-commerce inventory items through a RESTful API.',
             repoUrl: "https://github.com/Runtime-Terror123/InventoryApp",
             deployedUrl: "https://inventoryapp-r8aa.onrender.com/",
             recordingUrl: "https://www.youtube.com/watch?v=BE4Er_-gc0o",
@@ -87,6 +123,7 @@ export class ProjectsPageComponent {
         {
             id: 'final-bootcamp-project',
             name: 'DrivingEd-App (Final Bootcamp Project)',
+            description: "A solo-built .NET Blazor web app for streamlining a driving school's user management and lesson scheduling, end-to-end from database to UI.",
             repoUrl: "https://github.com/luisflores09/DrivingEd-App",
             deployedUrl: undefined,
             recordingUrl: "https://www.youtube.com/watch?v=xzlWR1KAluA",
@@ -125,6 +162,7 @@ export class ProjectsPageComponent {
         {
             id: 'back-end-module-project',
             name: 'EchoPlay-API (Back End Module Project)',
+            description: 'A JWT-secured ASP.NET Core REST API integrating Spotify login and persisting user-specific music favorites, categories, and search history in SQL Server.',
             repoUrl: "https://github.com/EchoSync-369/EchoPlay-API",
             deployedUrl: undefined,
             recordingUrl: "https://www.youtube.com/watch?v=KRyscIFtUDk",
@@ -160,6 +198,7 @@ export class ProjectsPageComponent {
         {
             id: 'front-end-module-project',
             name: 'EchoPlay (Front End Module Project)',
+            description: 'A responsive Angular music discovery app with Spotify OAuth, categorized search, an embedded player, and a favorites dashboard backed by an authenticated REST API.',
             repoUrl: "https://github.com/EchoSync-369/EchoPlay",
             deployedUrl: undefined,
             recordingUrl: "https://www.youtube.com/watch?v=rPibrvJNnZU",
@@ -197,6 +236,7 @@ export class ProjectsPageComponent {
         {
             id: 'deployment-module-project',
             name: 'Pixel Forge (Deployment Module Project)',
+            description: 'A Steam-authenticated Angular + Flask app containerized with Docker and automatically deployed to Render via a GitHub Actions CI/CD pipeline.',
             repoUrl: "https://github.com/PixelForgeArcade/PixelForgeApp",
             deployedUrl: "https://pixelforge-frontend-latest.onrender.com/",
             recordingUrl: "https://www.youtube.com/watch?v=NjoCwuKmnZI",
@@ -234,6 +274,7 @@ export class ProjectsPageComponent {
         {
             id: 'color-critters',
             name: 'Color-Critters (Kids Mini Game)',
+            description: 'A touch-first Angular mini game for kids that teaches animal names through emoji, sound effects, and speech synthesis in a fast tap-and-score loop.',
             repoUrl: "https://github.com/luisflores09/Color-Critters",
             deployedUrl: "http://color-critters.s3-website.us-east-2.amazonaws.com/",
             recordingUrl: undefined,
@@ -269,6 +310,7 @@ export class ProjectsPageComponent {
         {
             id: 'text-analysis-app',
             name: 'Text-Analysis-App',
+            description: 'A serverless Angular app that sends text to AWS Comprehend via API Gateway + Lambda and displays sentiment, key phrases, and entities.',
             repoUrl: undefined,
             deployedUrl: "http://text-analysis-app.s3-website.us-east-2.amazonaws.com/",
             recordingUrl: undefined,
