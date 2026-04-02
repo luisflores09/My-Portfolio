@@ -309,7 +309,7 @@ export class ProjectsPageComponent {
         },
         {
             id: 'text-analysis-app',
-            name: 'Text-Analysis-App',
+            name: 'Text-Analysis-App (Cloud Module Project)',
             description: 'A serverless Angular app that sends text to AWS Comprehend via API Gateway + Lambda and displays sentiment, key phrases, and entities.',
             repoUrl: undefined,
             deployedUrl: "http://text-analysis-app.s3-website.us-east-2.amazonaws.com/",
