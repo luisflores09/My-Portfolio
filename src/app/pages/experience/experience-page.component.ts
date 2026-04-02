@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 type Skill = {
   name: string;
@@ -9,22 +10,12 @@ type Skill = {
 
 @Component({
   selector: 'app-experience-page',
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule],
   templateUrl: './experience-page.component.html',
   styleUrl: './experience-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExperiencePageComponent {
-  experienceHighlights: string[] = [
-    'Delivered responsive, accessible front ends (Angular/TypeScript, React) with maintainable component structure.',
-    'Designed and integrated REST APIs across stacks (.NET/Express/Flask) with clear contracts, validation, and error handling.',
-    'Implemented secure authentication and authorization (JWT/OAuth/OpenID) and followed safe client/server patterns.',
-    'Participated in a cybersecurity tournament, learning common API vulnerabilities and applying OWASP Top 10 concepts (auth, access control, input validation).',
-    'Modeled relational data with integrity in mind (EF Core + SQL Server), including migrations and constraints.',
-    'Improved reliability through testing, CI/CD, Docker, and environment-based configuration.',
-    'Communicated trade-offs and shipped iteratively—delivering smaller slices, gathering feedback, and polishing confidently.'
-  ];
-
   skills: Skill[] = [
     { name: 'Angular', icon: '/skills/angular.svg' },
     { name: 'TypeScript', icon: '/skills/typescript.svg' },

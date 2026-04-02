@@ -9,6 +9,166 @@
 	gap: 8px;
 }
 
+// ── Experience staggered cards ─────────────────────────────────────────────
+
+.expList {
+	display: grid;
+	gap: 14px;
+	width: 100%;
+}
+
+.expCard {
+	display: flex;
+	align-items: stretch;
+	border-radius: calc(var(--radius-lg) + 4px);
+	overflow: hidden;
+	border: 1px solid color-mix(in srgb, var(--card-border) 80%, transparent);
+	background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+	box-shadow: 0 8px 28px color-mix(in srgb, var(--text-primary) 6%, transparent);
+	transition: box-shadow 160ms ease, transform 160ms ease;
+	will-change: transform;
+}
+
+.expCard:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 40px color-mix(in srgb, var(--text-primary) 10%, transparent);
+}
+
+.expCard:nth-child(even) {
+	flex-direction: row-reverse;
+}
+
+.expCard:nth-child(even) .expCard__body {
+	text-align: right;
+}
+
+// Accent column
+.expCard__accent {
+	flex: 0 0 96px;
+	display: grid;
+	place-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+// Blob shape behind icon
+.expCard__accent::before {
+	content: '';
+	position: absolute;
+	inset: -20%;
+	border-radius: 42% 58% 55% 45% / 48% 40% 60% 52%;
+	opacity: 0.22;
+}
+
+.expCard--orange .expCard__accent {
+	background: color-mix(in srgb, var(--text-orange) 10%, transparent);
+}
+.expCard--orange .expCard__accent::before {
+	background: var(--text-orange);
+}
+.expCard--orange .expCard__icon {
+	color: var(--text-orange);
+}
+.expCard--orange .expCard__title {
+	color: var(--text-orange);
+}
+
+.expCard--violet .expCard__accent {
+	background: color-mix(in srgb, var(--text-violet) 10%, transparent);
+}
+.expCard--violet .expCard__accent::before {
+	background: var(--text-violet);
+}
+.expCard--violet .expCard__icon {
+	color: var(--text-violet);
+}
+.expCard--violet .expCard__title {
+	color: var(--text-violet);
+}
+
+.expCard--teal .expCard__accent {
+	background: color-mix(in srgb, var(--text-secondary) 10%, transparent);
+}
+.expCard--teal .expCard__accent::before {
+	background: var(--text-secondary);
+}
+.expCard--teal .expCard__icon {
+	color: var(--text-secondary);
+}
+.expCard--teal .expCard__title {
+	color: var(--text-secondary);
+}
+
+.expCard--red .expCard__accent {
+	background: color-mix(in srgb, var(--text-accent) 10%, transparent);
+}
+.expCard--red .expCard__accent::before {
+	background: var(--text-accent);
+}
+.expCard--red .expCard__icon {
+	color: var(--text-accent);
+}
+.expCard--red .expCard__title {
+	color: var(--text-accent);
+}
+
+.expCard__icon {
+	position: relative;
+	z-index: 1;
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.expCard__body {
+	flex: 1;
+	padding: 18px 22px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 6px;
+	text-align: left;
+}
+
+.expCard__title {
+	margin: 0;
+	font-size: 1.15rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+}
+
+.expCard__text {
+	margin: 0;
+	font-size: 1.05rem;
+	line-height: 1.6;
+	color: var(--text-primary);
+	opacity: 0.82;
+}
+
+@media (max-width: 560px) {
+	.expCard,
+	.expCard:nth-child(even) {
+		flex-direction: column;
+	}
+
+	.expCard:nth-child(even) .expCard__body {
+		text-align: left;
+	}
+
+	.expCard__accent {
+		flex: 0 0 56px;
+	}
+
+	.expCard__icon {
+		font-size: 26px;
+		width: 26px;
+		height: 26px;
+		line-height: 26px;
+	}
+}
+
 .skillsGrid {
 	margin-top: 10px;
 	width: 100%;

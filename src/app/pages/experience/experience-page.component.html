@@ -22,10 +22,78 @@
 
 	<section class="section">
 		<h2>Experience</h2>
-		<ul class="bullets">
-			@for (item of experienceHighlights; track item) {
-				<li>{{ item }}</li>
-			}
-		</ul>
+		<div class="expList">
+
+			<div class="expCard expCard--teal">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">devices</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Front-End Development</h3>
+					<p class="expCard__text">Delivered responsive, accessible front ends in Angular/TypeScript and React with maintainable component structure and a strong focus on UX.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--red">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">hub</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">API Integration</h3>
+					<p class="expCard__text">Designed and integrated REST APIs across .NET, Express, and Flask stacks with clear contracts, input validation, and robust error handling.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--orange">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">lock</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Auth &amp; Security</h3>
+					<p class="expCard__text">Implemented JWT, OAuth, and OpenID authentication with least-privilege design and safe client/server patterns throughout.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--violet">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">security</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Cybersecurity</h3>
+					<p class="expCard__text">Competed in a cybersecurity tournament focused on API vulnerabilities and the OWASP Top 10—reinforcing secure-by-default habits in access control and input validation.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--teal">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">storage</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Data Modeling</h3>
+					<p class="expCard__text">Modeled relational data with integrity in mind using EF Core and SQL Server—migrations, constraints, and schemas designed to scale cleanly.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--red">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">verified</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Reliability Engineering</h3>
+					<p class="expCard__text">Improved confidence and consistency through unit testing, CI/CD pipelines, Docker-based workflows, and environment-based configuration.</p>
+				</div>
+			</div>
+
+			<div class="expCard expCard--orange">
+				<div class="expCard__accent">
+					<mat-icon class="expCard__icon" aria-hidden="true">trending_up</mat-icon>
+				</div>
+				<div class="expCard__body">
+					<h3 class="expCard__title">Iterative Delivery</h3>
+					<p class="expCard__text">Shipped in smaller slices, communicated trade-offs clearly, gathered feedback early, and polished based on real-world results.</p>
+				</div>
+			</div>
+
+		</div>
 	</section>
 </main>
